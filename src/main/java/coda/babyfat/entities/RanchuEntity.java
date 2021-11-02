@@ -170,8 +170,8 @@ public class RanchuEntity extends AnimalEntity {
     }
 
     @Override
-    public boolean removeWhenFarAway(double distanceToClosestPlayer) {
-        return !this.isFromBucket() && !this.hasCustomName();
+    public boolean removeWhenFarAway(double p_213397_1_) {
+        return false;
     }
 
     @Override
@@ -206,6 +206,11 @@ public class RanchuEntity extends AnimalEntity {
             super.travel(travelVector);
         }
 
+    }
+
+    @Override
+    protected boolean shouldDespawnInPeaceful() {
+        return false;
     }
 
     @Nullable
