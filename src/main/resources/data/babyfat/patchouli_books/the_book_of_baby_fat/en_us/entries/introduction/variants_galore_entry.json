@@ -1,0 +1,29 @@
+{
+  "name": "Variants Galore",
+  "icon": "babyfat:ranchu_bucket",
+  "category": "babyfat:baby_fat_101",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "These ranchus may look bland at first, but they come in over 100 different color variations, as well as 3 different tail variations, totaling up for over 300 total variations! When you first find some ranchus, they will be a beige color. However, through breeding them you can discover some beautiful colors. Reds, blacks, oranges, whites, the list goes on."
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "babyfat:ranchu{Variant:270}",
+      "text": "An orange and white ranchu, with black stripes and a short tail.",
+      "offset": -0.3
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "babyfat:ranchu{Variant:296}",
+      "text": "A black ranchu, with white accents and a medium tail.",
+      "offset": -0.3
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "babyfat:ranchu{Variant:256}",
+      "text": "A red and white ranchu, with black stripes and a long tail.",
+      "offset": -0.3
+    }
+  ]
+}

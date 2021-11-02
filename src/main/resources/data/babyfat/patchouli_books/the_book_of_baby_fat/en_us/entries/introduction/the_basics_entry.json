@@ -1,0 +1,17 @@
+{
+  "name": "The Basics",
+  "icon": "babyfat:ranchu",
+  "category": "babyfat:baby_fat_101",
+  "pages": [
+    {
+      "type": "patchouli:entity",
+      "entity": "babyfat:ranchu",
+      "text": "Meet the Ranchu! These fish are great for any aquarium.",
+      "offset": -0.3
+    },
+    {
+      "type": "patchouli:text",
+      "text": "These are unique little fish. They can be found in river biomes, and picked up in buckets to transport them. There is a few things that set them apart from regular fish, though. These fish will breed under the right conditions, resulting in cute little ranchus!"
+    }
+  ]
+}

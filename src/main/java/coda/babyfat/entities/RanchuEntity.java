@@ -226,7 +226,7 @@ public class RanchuEntity extends AnimalEntity {
     public void checkTime() {
         long time = this.level.getLevelData().getDayTime();
         if (time > 23000 && time < 24000) {
-            this.setInLoveTime(600);
+            this.setInLoveTime(100);
         }
     }
 
