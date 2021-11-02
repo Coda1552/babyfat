@@ -37,7 +37,7 @@ import java.util.Random;
 public class RanchuEntity extends AnimalEntity {
     public static final DataParameter<Integer> VARIANT = EntityDataManager.defineId(RanchuEntity.class, DataSerializers.INT);
     private static final DataParameter<Boolean> FROM_BUCKET = EntityDataManager.defineId(RanchuEntity.class, DataSerializers.BOOLEAN);
-    public static final int MAX_VARIANTS = 304;
+    public static final int MAX_VARIANTS = 303;
 
     public RanchuEntity(EntityType<? extends AnimalEntity> type, World worldIn) {
         super(type, worldIn);
@@ -181,7 +181,6 @@ public class RanchuEntity extends AnimalEntity {
 
     @Override
     public void aiStep() {
-        super.aiStep();
         if (!this.isInWater() && this.onGround && this.verticalCollision) {
             this.setDeltaMovement(this.getDeltaMovement().add((this.random.nextFloat() * 2.0F - 1.0F) * 0.05F, (double)0.4F, (double)((this.random.nextFloat() * 2.0F - 1.0F) * 0.05F)));
             this.onGround = false;
@@ -191,6 +190,7 @@ public class RanchuEntity extends AnimalEntity {
 
         this.checkTime();
 
+        super.aiStep();
     }
 
     @Override
