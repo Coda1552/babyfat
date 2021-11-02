@@ -30,7 +30,7 @@ public class RanchuModel<T extends Entity> extends AgeableModel<RanchuEntity> {
         this.texHeight = 32;
         this.pectoralfinright = new ModelRenderer(this, 13, 12);
         this.pectoralfinright.setPos(-2.5F, 3.0F, -2.0F);
-        this.pectoralfinright.addBox(-1.5F, 0.0F, -0.5F, 2.0F, 0.0F, 3.0F, 0.0F, 0.0F, 0.0F);
+        this.pectoralfinright.addBox(-2.0F, 0.0F, -0.5F, 2.0F, 0.0F, 3.0F, 0.0F, 0.0F, 0.0F);
         this.setRotateAngle(pectoralfinright, 0.0F, 0.0F, -1.3962634015954636F);
         this.headbottom = new ModelRenderer(this, 0, 18);
         this.headbottom.setPos(0.0F, 2.5F, 0.0F);
@@ -42,7 +42,7 @@ public class RanchuModel<T extends Entity> extends AgeableModel<RanchuEntity> {
         this.setRotateAngle(tailfinright, 0.0F, -1.5707963267948966F, 1.5707963267948966F);
         this.pectoralfinleft = new ModelRenderer(this, 17, 12);
         this.pectoralfinleft.setPos(2.5F, 3.0F, -2.0F);
-        this.pectoralfinleft.addBox(-0.5F, 0.0F, -0.5F, 2.0F, 0.0F, 3.0F, 0.0F, 0.0F, 0.0F);
+        this.pectoralfinleft.addBox(0.0F, 0.0F, -0.5F, 2.0F, 0.0F, 3.0F, 0.0F, 0.0F, 0.0F);
         this.setRotateAngle(pectoralfinleft, 0.0F, 0.0F, 1.3962634015954636F);
         this.tailbase = new ModelRenderer(this, 20, 0);
         this.tailbase.setPos(0.0F, -1.5F, 3.0F);
@@ -79,6 +79,10 @@ public class RanchuModel<T extends Entity> extends AgeableModel<RanchuEntity> {
             this.tailfinleft.xRot = MathHelper.cos(-2.0F + limbSwing * speed * 0.5F) * degree * 1.5F * limbSwingAmount;
             this.pectoralfinright.zRot = MathHelper.cos(1.0F + limbSwing * speed * 0.5F) * degree * 2.0F * limbSwingAmount;
             this.pectoralfinleft.zRot = MathHelper.cos(1.0F + limbSwing * speed * 0.5F) * degree * -2.0F * limbSwingAmount;
+        }
+        if (!entityIn.isAddedToWorld()) {
+            this.pectoralfinleft.zRot = 0.6F;
+            this.pectoralfinright.zRot = -0.6F;
         }
     }
 
