@@ -188,8 +188,6 @@ public class RanchuEntity extends AnimalEntity {
             this.playSound(this.getFlopSound(), this.getSoundVolume(), this.getVoicePitch());
         }
 
-        this.checkTime();
-
         super.aiStep();
     }
 
@@ -205,7 +203,13 @@ public class RanchuEntity extends AnimalEntity {
         } else {
             super.travel(travelVector);
         }
+    }
 
+    @Override
+    public void tick() {
+        super.tick();
+
+        this.checkTime();
     }
 
     @Override
@@ -229,7 +233,7 @@ public class RanchuEntity extends AnimalEntity {
     }
 
     public void checkTime() {
-        long time = this.level.dayTime();
+        long time = this.level.getLevelData().getDayTime();
         if (time > 23000 && time < 24000) {
             this.setInLoveTime(100);
         }
