@@ -125,7 +125,7 @@ public class RanchuEntity extends AnimalEntity {
     @Override
     public void readAdditionalSaveData(CompoundNBT compound) {
         super.readAdditionalSaveData(compound);
-        setVariant(MathHelper.clamp(compound.getInt("Variant"), 0, MAX_VARIANTS - 1));
+        setVariant(MathHelper.clamp(compound.getInt("Variant"), 1, MAX_VARIANTS));
         this.setFromBucket(compound.getBoolean("FromBucket"));
     }
 
