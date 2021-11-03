@@ -29,26 +29,6 @@ public class BFSpawnEggItem extends SpawnEggItem {
         UNADDED_EGGS.add(this);
     }
 
-    public static void initSpawnEggs() {
-        final Map<EntityType<?>, SpawnEggItem> EGGS = ObfuscationReflectionHelper.getPrivateValue(SpawnEggItem.class, null, "BY_ID");
-        DefaultDispenseItemBehavior dispenseBehaviour = new DefaultDispenseItemBehavior() {
-            @Override
-            protected ItemStack execute(IBlockSource source, ItemStack stack) {
-                Direction direction = source.getBlockState().getValue(DispenserBlock.FACING);
-                EntityType<?> type = ((SpawnEggItem) stack.getItem()).getType(stack.getTag());
-                type.spawn(source.getLevel(), stack, null, source.getPos().relative(direction), SpawnReason.DISPENSER, direction != Direction.UP, false);
-                stack.shrink(1);
-                return stack;
-            }
-        };
-
-        for (final SpawnEggItem spawnEgg : UNADDED_EGGS) {
-            EGGS.put(spawnEgg.getType(null), spawnEgg);
-            DispenserBlock.registerBehavior(spawnEgg, dispenseBehaviour);
-        }
-        UNADDED_EGGS.clear();
-    }
-
     @Override
     public EntityType<?> getType(CompoundNBT nbt) {
         return this.entityTypeSupplier.get();

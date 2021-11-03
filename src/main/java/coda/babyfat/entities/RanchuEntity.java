@@ -184,10 +184,17 @@ public class RanchuEntity extends AnimalEntity {
     @Override
     public void aiStep() {
         if (!this.isInWater() && this.onGround && this.verticalCollision) {
-            this.setDeltaMovement(this.getDeltaMovement().add((this.random.nextFloat() * 2.0F - 1.0F) * 0.05F, (double)0.4F, (double)((this.random.nextFloat() * 2.0F - 1.0F) * 0.05F)));
+            this.setDeltaMovement(this.getDeltaMovement().add((this.random.nextFloat() * 2.0F - 1.0F) * 0.05F, 0.4F, (this.random.nextFloat() * 2.0F - 1.0F) * 0.05F));
             this.onGround = false;
             this.hasImpulse = true;
             this.playSound(this.getFlopSound(), this.getSoundVolume(), this.getVoicePitch());
+        }
+
+        long time = level.getLevelData().getDayTime();
+
+        // TODO: fix this :allah:
+        if (time >= 23500 && time <= 23645 /*&& tickCount % 20 == 0*//* && canFindLettuce()*/) {
+            this.setInLoveTime(40);
         }
 
         super.aiStep();
@@ -211,10 +218,6 @@ public class RanchuEntity extends AnimalEntity {
     public void tick() {
         super.tick();
 
-        long time = this.level.getLevelData().getDayTime();
-        if (time > 23000 && time < 23999 && canFindLettuce()) {
-            this.setInLoveTime(100);
-        }
     }
 
     private boolean canFindLettuce() {

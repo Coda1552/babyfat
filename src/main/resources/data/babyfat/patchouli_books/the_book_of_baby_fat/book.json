@@ -1,5 +1,6 @@
 {
   "name": "The Book of Baby Fat",
-  "landing_text": "This fish fuckin obeast.",
-  "version": 1
+  "landing_text": "Ranchu goldfish, plants, and everything else in the mod!",
+  "version": 1,
+  "show_progress": false
 }
