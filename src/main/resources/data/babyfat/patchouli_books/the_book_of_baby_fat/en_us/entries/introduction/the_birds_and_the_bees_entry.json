@@ -5,7 +5,7 @@
   "pages": [
     {
       "type": "patchouli:text",
-      "text": "Unlike other fish in the game, ranchus can be bred. However, unlike other breedable animals, ranchus need specific environmental requirements to breed. Said factors are time of day, as well as ranchu population density. It must be early morning for them to breed, and if there are 6 or more ranchus in a small area, they will not breed. Ranchus can breed without any player interaction!"
+      "text": "Unlike other fish in the game, ranchus can be bred. However, unlike other breedable animals, ranchus need specific environmental requirements to breed. Said factors are time of day, nearby blocks, and the amount of ranchus nearby. It must be early morning for them to breed, and if there are 6 or more ranchus in a small area, they will not breed. Ranchus can breed without any player interaction!"
     },
     {
       "type": "patchouli:image",
