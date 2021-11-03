@@ -1,8 +1,11 @@
 package coda.babyfat.client;
 
 import coda.babyfat.client.renderer.RanchuRenderer;
+import coda.babyfat.init.BFBlocks;
 import coda.babyfat.init.BFEntities;
 import coda.babyfat.items.BFSpawnEggItem;
+import net.minecraft.client.renderer.RenderType;
+import net.minecraft.client.renderer.RenderTypeLookup;
 import net.minecraft.client.renderer.color.IItemColor;
 import net.minecraft.client.renderer.color.ItemColors;
 import net.minecraftforge.client.event.ColorHandlerEvent;
@@ -13,6 +16,8 @@ public class ClientEvents {
 
     public static void init() {
          RenderingRegistry.registerEntityRenderingHandler(BFEntities.RANCHU.get(), RanchuRenderer::new);
+
+        RenderTypeLookup.setRenderLayer(BFBlocks.WATER_LETTUCE.get(), RenderType.cutout());
     }
 
     @SubscribeEvent

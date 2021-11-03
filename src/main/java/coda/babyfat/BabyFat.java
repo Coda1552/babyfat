@@ -2,16 +2,19 @@ package coda.babyfat;
 
 import coda.babyfat.client.ClientEvents;
 import coda.babyfat.entities.RanchuEntity;
+import coda.babyfat.init.BFBlocks;
 import coda.babyfat.init.BFEntities;
+import coda.babyfat.init.BFFeatures;
 import coda.babyfat.init.BFItems;
+import net.minecraft.block.ComposterBlock;
 import net.minecraft.entity.EntityClassification;
 import net.minecraft.entity.EntitySpawnPlacementRegistry;
-import net.minecraft.entity.passive.fish.AbstractFishEntity;
-import net.minecraft.item.ItemGroup;
-import net.minecraft.item.ItemStack;
 import net.minecraft.world.biome.Biome;
+import net.minecraft.world.biome.Biomes;
 import net.minecraft.world.biome.MobSpawnInfo;
+import net.minecraft.world.gen.GenerationStage;
 import net.minecraft.world.gen.Heightmap;
+import net.minecraft.world.gen.feature.Features;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.EntityAttributeCreationEvent;
 import net.minecraftforge.event.entity.living.BabyEntitySpawnEvent;
@@ -35,11 +38,13 @@ public class BabyFat {
         bus.addListener(this::registerClient);
         bus.addListener(this::registerEntityAttributes);
         bus.addListener(this::registerCommon);
+        bus.addListener(this::registerFeatures);
         forgeBus.addListener(this::onRanchuBreed);
         forgeBus.addListener(this::onBiomeLoading);
 
         BFItems.ITEMS.register(bus);
         BFEntities.ENTITIES.register(bus);
+        BFBlocks.BLOCKS.register(bus);
     }
 
     private void registerEntityAttributes(EntityAttributeCreationEvent event) {
@@ -48,11 +53,22 @@ public class BabyFat {
 
     private void registerCommon(FMLCommonSetupEvent event) {
         EntitySpawnPlacementRegistry.register(BFEntities.RANCHU.get(), EntitySpawnPlacementRegistry.PlacementType.IN_WATER, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, RanchuEntity::checkFishSpawnRules);
+
+        event.enqueueWork(() -> {
+            ComposterBlock.COMPOSTABLES.put(BFItems.WATER_LETTUCE.get(), 0.65F);
+        });
+    }
+
+    private void registerFeatures(FMLCommonSetupEvent event) {
+        event.enqueueWork(BFFeatures::registerFeatures);
     }
 
     private void onBiomeLoading(BiomeLoadingEvent event) {
         if (event.getCategory() == Biome.Category.RIVER) {
             event.getSpawns().getSpawner(EntityClassification.WATER_CREATURE).add(new MobSpawnInfo.Spawners(BFEntities.RANCHU.get(), 1, 1, 1));
+        }
+        if (event.getName().equals("ocean")) {
+            event.getGeneration().addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, BFFeatures.WATER_LETTUCE);
         }
     }
 
@@ -97,11 +113,4 @@ public class BabyFat {
     private void registerClient(FMLClientSetupEvent event) {
         ClientEvents.init();
     }
-
-/*    public final static ItemGroup GROUP = new ItemGroup(MOD_ID) {
-        @Override
-        public ItemStack createIcon() {
-            return new ItemStack(BFItems.RANCHU.get();
-        }
-    };*/
 }
