@@ -1,0 +1,19 @@
+{
+  "name": "Aquatic Vegetation",
+  "icon": "babyfat:water_lettuce",
+  "category": "babyfat:baby_fat_101",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": " "
+    },
+    {
+      "type": "patchouli:image",
+      "images": [
+        "babyfat:textures/gui/entries/savanna.png"
+      ],
+      "border": true,
+      "text": "Water lettuce is naturally found in savannas!"
+    }
+  ]
+}
