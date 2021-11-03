@@ -1,5 +1,6 @@
 package coda.babyfat.entities;
 
+import coda.babyfat.init.BFBlocks;
 import coda.babyfat.init.BFEntities;
 import coda.babyfat.init.BFItems;
 import net.minecraft.advancements.CriteriaTriggers;
@@ -211,9 +212,29 @@ public class RanchuEntity extends AnimalEntity {
         super.tick();
 
         long time = this.level.getLevelData().getDayTime();
-        if (time > 23000 && time < 23999) {
+        if (time > 23000 && time < 23999 && canFindLettuce()) {
             this.setInLoveTime(100);
         }
+    }
+
+    private boolean canFindLettuce() {
+        BlockPos blockpos = blockPosition();
+        BlockPos.Mutable blockpos$mutable = new BlockPos.Mutable();
+
+        for(int i = 0; i < 10; ++i) {
+            for(int j = 0; j < 10; ++j) {
+                for(int k = 0; k <= j; k = k > 0 ? -k : 1 - k) {
+                    for(int l = k < j && k > -j ? j : 0; l <= j; l = l > 0 ? -l : 1 - l) {
+                        blockpos$mutable.setWithOffset(blockpos, k, i, l);
+                        if (level.getBlockState(blockpos$mutable).is(BFBlocks.WATER_LETTUCE.get())) {
+                            return true;
+                        }
+                    }
+                }
+            }
+        }
+
+        return false;
     }
 
     @Override
