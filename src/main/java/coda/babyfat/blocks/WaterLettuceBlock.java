@@ -10,6 +10,7 @@ import net.minecraft.fluid.Fluids;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.shapes.ISelectionContext;
 import net.minecraft.util.math.shapes.VoxelShape;
+import net.minecraft.util.math.vector.Vector3d;
 import net.minecraft.world.IBlockReader;
 import net.minecraftforge.common.PlantType;
 
@@ -21,7 +22,8 @@ public class WaterLettuceBlock extends BushBlock {
    }
 
    public VoxelShape getShape(BlockState p_220053_1_, IBlockReader p_220053_2_, BlockPos p_220053_3_, ISelectionContext p_220053_4_) {
-      return AABB;
+      Vector3d vector3d = p_220053_1_.getOffset(p_220053_2_, p_220053_3_);
+      return AABB.move(vector3d.x, vector3d.y, vector3d.z);
    }
 
    protected boolean mayPlaceOn(BlockState p_200014_1_, IBlockReader p_200014_2_, BlockPos p_200014_3_) {
@@ -33,5 +35,9 @@ public class WaterLettuceBlock extends BushBlock {
    @Override
    public PlantType getPlantType(IBlockReader world, BlockPos pos) {
       return PlantType.WATER;
+   }
+
+   public AbstractBlock.OffsetType getOffsetType() {
+      return AbstractBlock.OffsetType.XZ;
    }
 }

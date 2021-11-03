@@ -9,9 +9,10 @@ import net.minecraft.entity.ai.attributes.AttributeModifierMap;
 import net.minecraft.entity.ai.attributes.Attributes;
 import net.minecraft.entity.ai.controller.DolphinLookController;
 import net.minecraft.entity.ai.controller.MovementController;
-import net.minecraft.entity.ai.goal.*;
+import net.minecraft.entity.ai.goal.AvoidEntityGoal;
+import net.minecraft.entity.ai.goal.PanicGoal;
+import net.minecraft.entity.ai.goal.RandomSwimmingGoal;
 import net.minecraft.entity.passive.AnimalEntity;
-import net.minecraft.entity.passive.fish.AbstractFishEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.item.ItemStack;
@@ -209,7 +210,10 @@ public class RanchuEntity extends AnimalEntity {
     public void tick() {
         super.tick();
 
-        this.checkTime();
+        long time = this.level.getLevelData().getDayTime();
+        if (time > 23000 && time < 23999) {
+            this.setInLoveTime(100);
+        }
     }
 
     @Override
@@ -230,13 +234,6 @@ public class RanchuEntity extends AnimalEntity {
 
     protected SoundEvent getFlopSound() {
         return SoundEvents.COD_FLOP;
-    }
-
-    public void checkTime() {
-        long time = this.level.getLevelData().getDayTime();
-        if (time > 23000 && time < 24000) {
-            this.setInLoveTime(100);
-        }
     }
 
     @Override
