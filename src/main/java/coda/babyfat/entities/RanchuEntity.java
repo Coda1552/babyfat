@@ -74,7 +74,7 @@ public class RanchuEntity extends AnimalEntity {
             return spawnDataIn;
         }
         else {
-            setVariant(random.nextInt(3) + 1);
+            setVariant(random.nextInt(3));
         }
         return super.finalizeSpawn(worldIn, difficultyIn, reason, spawnDataIn, dataTag);
 
@@ -127,7 +127,7 @@ public class RanchuEntity extends AnimalEntity {
     @Override
     public void readAdditionalSaveData(CompoundNBT compound) {
         super.readAdditionalSaveData(compound);
-        setVariant(MathHelper.clamp(compound.getInt("Variant"), 1, MAX_VARIANTS));
+        setVariant(MathHelper.clamp(compound.getInt("Variant"), 0, MAX_VARIANTS));
         this.setFromBucket(compound.getBoolean("FromBucket"));
     }
 
