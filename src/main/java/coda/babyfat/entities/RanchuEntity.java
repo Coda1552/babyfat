@@ -192,32 +192,10 @@ public class RanchuEntity extends AnimalEntity {
 
         long time = level.getLevelData().getDayTime();
 
-        // TODO: fix this :allah:
-        if (time >= 23500 && time <= 23645 /*&& tickCount % 20 == 0*//* && canFindLettuce()*/) {
-            this.setInLoveTime(40);
+        if (canFindLettuce() && time % 23000 <= 1000) {
+            setInLoveTime(40);
         }
-
         super.aiStep();
-    }
-
-    @Override
-    public void travel(Vector3d travelVector) {
-        if (this.isEffectiveAi() && this.isInWater()) {
-            this.moveRelative(0.01F, travelVector);
-            this.move(MoverType.SELF, this.getDeltaMovement());
-            this.setDeltaMovement(this.getDeltaMovement().scale(0.9D));
-            if (this.getTarget() == null) {
-                this.setDeltaMovement(this.getDeltaMovement().add(0.0D, -0.005D, 0.0D));
-            }
-        } else {
-            super.travel(travelVector);
-        }
-    }
-
-    @Override
-    public void tick() {
-        super.tick();
-
     }
 
     private boolean canFindLettuce() {
@@ -238,6 +216,20 @@ public class RanchuEntity extends AnimalEntity {
         }
 
         return false;
+    }
+
+    @Override
+    public void travel(Vector3d travelVector) {
+        if (this.isEffectiveAi() && this.isInWater()) {
+            this.moveRelative(0.01F, travelVector);
+            this.move(MoverType.SELF, this.getDeltaMovement());
+            this.setDeltaMovement(this.getDeltaMovement().scale(0.9D));
+            if (this.getTarget() == null) {
+                this.setDeltaMovement(this.getDeltaMovement().add(0.0D, -0.005D, 0.0D));
+            }
+        } else {
+            super.travel(travelVector);
+        }
     }
 
     @Override

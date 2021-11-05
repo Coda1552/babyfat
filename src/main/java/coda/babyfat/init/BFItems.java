@@ -17,5 +17,5 @@ public class BFItems {
     public static final RegistryObject<Item> RANCHU_BUCKET = ITEMS.register("ranchu_bucket", () -> new RanchuBucketItem(BFEntities.RANCHU::get, () -> Fluids.WATER, new Item.Properties().tab(ItemGroup.TAB_MISC).stacksTo(1)));
     public static final RegistryObject<Item> RANCHU_SPAWN_EGG = ITEMS.register("ranchu_spawn_egg", () -> new BFSpawnEggItem(BFEntities.RANCHU, 0x736036, 0xd1a965, new Item.Properties().tab(ItemGroup.TAB_MISC)));
 
-    public static final RegistryObject<Item> WATER_LETTUCE = ITEMS.register("water_lettuce", () -> new LilyPadItem(BFBlocks.WATER_LETTUCE.get(), new Item.Properties().tab(ItemGroup.TAB_MISC)));
+    public static final RegistryObject<Item> WATER_LETTUCE = ITEMS.register("water_lettuce", () -> new LilyPadItem(BFBlocks.WATER_LETTUCE.get(), new Item.Properties().tab(ItemGroup.TAB_DECORATIONS)));
 }
