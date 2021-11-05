@@ -192,7 +192,7 @@ public class RanchuEntity extends AnimalEntity {
 
         long time = level.getLevelData().getDayTime();
 
-        if (canFindLettuce() && time % 23000 <= 1000) {
+        if (canFindLettuce() && time % 24000 > 23000) {
             setInLoveTime(40);
         }
         super.aiStep();
