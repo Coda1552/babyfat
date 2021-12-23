@@ -1,5 +1,6 @@
 package coda.babyfat.entities;
 
+import coda.babyfat.entities.goal.RanchuBreedGoal;
 import coda.babyfat.init.BFBlocks;
 import coda.babyfat.init.BFEntities;
 import coda.babyfat.init.BFItems;

@@ -1,5 +1,6 @@
 package coda.babyfat.client;
 
+import coda.babyfat.client.renderer.BallRenderer;
 import coda.babyfat.client.renderer.RanchuRenderer;
 import coda.babyfat.init.BFBlocks;
 import coda.babyfat.init.BFEntities;
@@ -16,8 +17,9 @@ public class ClientEvents {
 
     public static void init() {
          RenderingRegistry.registerEntityRenderingHandler(BFEntities.RANCHU.get(), RanchuRenderer::new);
+         RenderingRegistry.registerEntityRenderingHandler(BFEntities.BALL.get(), BallRenderer::new);
 
-        RenderTypeLookup.setRenderLayer(BFBlocks.WATER_LETTUCE.get(), RenderType.cutout());
+         RenderTypeLookup.setRenderLayer(BFBlocks.WATER_LETTUCE.get(), RenderType.cutout());
     }
 
     @SubscribeEvent

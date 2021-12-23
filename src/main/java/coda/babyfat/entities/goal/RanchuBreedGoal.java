@@ -1,5 +1,6 @@
-package coda.babyfat.entities;
+package coda.babyfat.entities.goal;
 
+import coda.babyfat.entities.RanchuEntity;
 import net.minecraft.entity.EntityPredicate;
 import net.minecraft.entity.ai.goal.Goal;
 import net.minecraft.world.World;

@@ -1,6 +1,7 @@
 package coda.babyfat;
 
 import coda.babyfat.client.ClientEvents;
+import coda.babyfat.entities.BallEntity;
 import coda.babyfat.entities.RanchuEntity;
 import coda.babyfat.init.BFBlocks;
 import coda.babyfat.init.BFEntities;
@@ -49,6 +50,7 @@ public class BabyFat {
 
     private void registerEntityAttributes(EntityAttributeCreationEvent event) {
          event.put(BFEntities.RANCHU.get(), RanchuEntity.createAttributes().build());
+         event.put(BFEntities.BALL.get(), BallEntity.createAttributes().build());
     }
 
     private void registerCommon(FMLCommonSetupEvent event) {
