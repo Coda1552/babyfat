@@ -2,8 +2,7 @@ package coda.babyfat.client.renderer;
 
 import coda.babyfat.BabyFat;
 import coda.babyfat.client.model.RanchuModel;
-import coda.babyfat.entities.RanchuEntity;
-import com.google.common.collect.Maps;
+import coda.babyfat.common.entities.RanchuEntity;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import net.minecraft.client.renderer.entity.EntityRendererManager;
 import net.minecraft.client.renderer.entity.MobRenderer;
@@ -13,8 +12,6 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.vector.Vector3f;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
-
-import java.util.Map;
 
 @OnlyIn(Dist.CLIENT)
 public class RanchuRenderer extends MobRenderer<RanchuEntity, RanchuModel<RanchuEntity>> {

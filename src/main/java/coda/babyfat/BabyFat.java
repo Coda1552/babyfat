@@ -1,21 +1,18 @@
 package coda.babyfat;
 
 import coda.babyfat.client.ClientEvents;
-import coda.babyfat.entities.BallEntity;
-import coda.babyfat.entities.RanchuEntity;
-import coda.babyfat.init.BFBlocks;
-import coda.babyfat.init.BFEntities;
-import coda.babyfat.init.BFFeatures;
-import coda.babyfat.init.BFItems;
-import net.minecraft.block.ComposterBlock;
-import net.minecraft.entity.EntityClassification;
-import net.minecraft.entity.EntitySpawnPlacementRegistry;
-import net.minecraft.world.biome.Biome;
-import net.minecraft.world.biome.Biomes;
-import net.minecraft.world.biome.MobSpawnInfo;
-import net.minecraft.world.gen.GenerationStage;
-import net.minecraft.world.gen.Heightmap;
-import net.minecraft.world.gen.feature.Features;
+import coda.babyfat.common.entities.RanchuEntity;
+import coda.babyfat.registry.BFBlocks;
+import coda.babyfat.registry.BFEntities;
+import coda.babyfat.registry.BFFeatures;
+import coda.babyfat.registry.BFItems;
+import net.minecraft.world.entity.MobCategory;
+import net.minecraft.world.entity.SpawnPlacements;
+import net.minecraft.world.level.biome.Biome;
+import net.minecraft.world.level.biome.MobSpawnSettings;
+import net.minecraft.world.level.block.ComposterBlock;
+import net.minecraft.world.level.levelgen.GenerationStep;
+import net.minecraft.world.level.levelgen.Heightmap;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.EntityAttributeCreationEvent;
 import net.minecraftforge.event.entity.living.BabyEntitySpawnEvent;
@@ -50,11 +47,10 @@ public class BabyFat {
 
     private void registerEntityAttributes(EntityAttributeCreationEvent event) {
          event.put(BFEntities.RANCHU.get(), RanchuEntity.createAttributes().build());
-         event.put(BFEntities.BALL.get(), BallEntity.createAttributes().build());
     }
 
     private void registerCommon(FMLCommonSetupEvent event) {
-        EntitySpawnPlacementRegistry.register(BFEntities.RANCHU.get(), EntitySpawnPlacementRegistry.PlacementType.IN_WATER, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, RanchuEntity::checkFishSpawnRules);
+        SpawnPlacements.register(BFEntities.RANCHU.get(), SpawnPlacements.Type.IN_WATER, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, RanchuEntity::checkFishSpawnRules);
 
         event.enqueueWork(() -> {
             ComposterBlock.COMPOSTABLES.put(BFItems.WATER_LETTUCE.get(), 0.65F);
@@ -66,11 +62,11 @@ public class BabyFat {
     }
 
     private void onBiomeLoading(BiomeLoadingEvent event) {
-        if (event.getCategory() == Biome.Category.RIVER) {
-            event.getSpawns().getSpawner(EntityClassification.WATER_CREATURE).add(new MobSpawnInfo.Spawners(BFEntities.RANCHU.get(), 1, 1, 1));
+        if (event.getCategory() == Biome.BiomeCategory.RIVER) {
+            event.getSpawns().getSpawner(MobCategory.WATER_CREATURE).add(new MobSpawnSettings.SpawnerData(BFEntities.RANCHU.get(), 1, 1, 1));
         }
         if (event.getName().getPath().equals("savanna")) {
-            event.getGeneration().addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, BFFeatures.WATER_LETTUCE);
+            //event.getGeneration().addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, BFFeatures.WATER_LETTUCE);
         }
     }
 

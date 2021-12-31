@@ -1,6 +1,6 @@
 package coda.babyfat.client.model;
 
-import coda.babyfat.entities.RanchuEntity;
+import coda.babyfat.common.entities.RanchuEntity;
 import com.google.common.collect.ImmutableList;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.vertex.IVertexBuilder;

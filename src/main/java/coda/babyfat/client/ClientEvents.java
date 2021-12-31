@@ -1,10 +1,8 @@
 package coda.babyfat.client;
 
-import coda.babyfat.client.renderer.BallRenderer;
 import coda.babyfat.client.renderer.RanchuRenderer;
-import coda.babyfat.init.BFBlocks;
-import coda.babyfat.init.BFEntities;
-import coda.babyfat.items.BFSpawnEggItem;
+import coda.babyfat.registry.BFBlocks;
+import coda.babyfat.registry.BFEntities;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.RenderTypeLookup;
 import net.minecraft.client.renderer.color.IItemColor;

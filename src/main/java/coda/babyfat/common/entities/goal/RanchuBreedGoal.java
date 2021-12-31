@@ -1,20 +1,20 @@
-package coda.babyfat.entities.goal;
+package coda.babyfat.common.entities.goal;
 
-import coda.babyfat.entities.RanchuEntity;
-import net.minecraft.entity.EntityPredicate;
-import net.minecraft.entity.ai.goal.Goal;
-import net.minecraft.world.World;
-import net.minecraft.world.server.ServerWorld;
+import coda.babyfat.common.entities.RanchuEntity;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.world.entity.ai.goal.Goal;
+import net.minecraft.world.entity.ai.targeting.TargetingConditions;
+import net.minecraft.world.level.Level;
 
 import javax.annotation.Nullable;
 import java.util.EnumSet;
 import java.util.List;
 
 public class RanchuBreedGoal extends Goal {
-    private static final EntityPredicate PARTNER_TARGETING = (new EntityPredicate()).range(8.0D).allowInvulnerable().allowSameTeam().allowUnseeable();
+    private static final TargetingConditions PARTNER_TARGETING = TargetingConditions.forNonCombat().range(8.0D).ignoreLineOfSight();
     protected final RanchuEntity animal;
     private final Class<? extends RanchuEntity> mateClass;
-    protected final World world;
+    protected final Level world;
     protected RanchuEntity targetMate;
     private int spawnBabyDelay;
     private final double moveSpeed;
@@ -32,7 +32,7 @@ public class RanchuBreedGoal extends Goal {
     }
 
     public boolean canUse() {
-        List<RanchuEntity> list = animal.level.getNearbyEntities(this.mateClass, PARTNER_TARGETING, this.animal, this.animal.getBoundingBox().inflate(8.0D));
+        List<? extends RanchuEntity> list = animal.level.getNearbyEntities(this.mateClass, PARTNER_TARGETING, this.animal, this.animal.getBoundingBox().inflate(8.0D));
 
         assert !this.animal.isBaby();
 
@@ -69,7 +69,7 @@ public class RanchuBreedGoal extends Goal {
 
     @Nullable
     private RanchuEntity getNearbyMate() {
-        List<RanchuEntity> list = this.world.getNearbyEntities(this.mateClass, PARTNER_TARGETING, this.animal, this.animal.getBoundingBox().inflate(20.0D));
+        List<? extends RanchuEntity> list = this.world.getNearbyEntities(this.mateClass, PARTNER_TARGETING, this.animal, this.animal.getBoundingBox().inflate(20.0D));
         double d0 = Double.MAX_VALUE;
         RanchuEntity animalentity = null;
 
@@ -84,6 +84,6 @@ public class RanchuBreedGoal extends Goal {
     }
 
     protected void spawnBaby() {
-        this.animal.spawnChildFromBreeding((ServerWorld)this.world, this.targetMate);
+        this.animal.spawnChildFromBreeding((ServerLevel) this.world, this.targetMate);
     }
 }
