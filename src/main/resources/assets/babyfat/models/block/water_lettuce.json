@@ -2,6 +2,7 @@
 	"credit": "Made with Blockbench",
 	"ambientocclusion": false,
 	"texture_size": [64, 64],
+	"render_type": "cutout",
 	"textures": {
 		"2": "babyfat:block/water_lettuce",
 		"particle": "babyfat:block/water_lettuce"
