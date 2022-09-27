@@ -22,9 +22,9 @@ public class RanchuRenderer<T extends Ranchu> extends MobRenderer<T, RanchuModel
 	}
 
 	@Override
-	public ResourceLocation getTextureLocation(Ranchu entity) {
+	public ResourceLocation getTextureLocation(T entity) {
 		int variant = entity.getVariant() + 1;
-		ResourceLocation loc = new ResourceLocation(BabyFat.MOD_ID, "textures/entity/ranchu_" + variant + ".png");
+		ResourceLocation loc = new ResourceLocation(BabyFat.MOD_ID, "textures/entity/ranchu/ranchu_" + variant + ".png");
 		return TEXTURES[variant] = loc;
 	}
 
@@ -33,7 +33,7 @@ public class RanchuRenderer<T extends Ranchu> extends MobRenderer<T, RanchuModel
 		super.setupRotations(entity, posestack, ageInTicks, rotationYaw, partialTicks);
 		float f = 4.3F * Mth.sin(0.6F * ageInTicks);
 		posestack.mulPose(Vector3f.YP.rotationDegrees(f));
-		if (!entity.isInWater() && entity.isAddedToWorld()) {
+		if (!entity.isInWater()) {
 			posestack.translate(0.1F, 0.1F, -0.1F);
 			posestack.mulPose(Vector3f.ZP.rotationDegrees(90.0F));
 		}

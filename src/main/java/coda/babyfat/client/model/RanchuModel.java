@@ -18,24 +18,24 @@ import java.util.Collections;
 
 @OnlyIn(Dist.CLIENT)
 public class RanchuModel<T extends Ranchu> extends AgeableListModel<T> {
+	public ModelPart ranchu;
 	public ModelPart body;
 	public ModelPart tailbase;
-	public ModelPart headtop;
+	public ModelPart head;
 	public ModelPart backfinright;
 	public ModelPart backfinleft;
 	public ModelPart finright;
 	public ModelPart finleft;
-	public ModelPart headbottom;
 
 	public RanchuModel(ModelPart root) {
-		this.body = root.getChild("body");
+		this.ranchu = root.getChild("ranchu");
+		this.body = this.ranchu.getChild("body");
 		this.tailbase = this.body.getChild("tailbase");
-		this.headtop = this.body.getChild("headtop");
-		this.backfinright = this.body.getChild("backfinright");
-		this.backfinleft = this.body.getChild("backfinleft");
-		this.finright = this.tailbase.getChild("finright");
-		this.finleft = this.tailbase.getChild("finleft");
-		this.headbottom = this.headtop.getChild("headbottom");
+		this.head = this.body.getChild("head");
+		this.backfinright = this.tailbase.getChild("backfinright");
+		this.backfinleft = this.tailbase.getChild("backfinleft");
+		this.finright = this.body.getChild("finright");
+		this.finleft = this.body.getChild("finleft");
 	}
 
 	public static LayerDefinition createBodyLayer() {
@@ -80,10 +80,6 @@ public class RanchuModel<T extends Ranchu> extends AgeableListModel<T> {
 			this.backfinright.zRot = Mth.cos(1.0F + limbSwing * speed * 0.5F) * degree * 2.0F * limbSwingAmount;
 			this.backfinleft.zRot = Mth.cos(1.0F + limbSwing * speed * 0.5F) * degree * -2.0F * limbSwingAmount;
 		}
-		if (!entityIn.isAddedToWorld()) {
-			this.backfinleft.zRot = 0.6F;
-			this.backfinright.zRot = -0.6F;
-		}
 	}
 
 	@Override
@@ -93,7 +89,7 @@ public class RanchuModel<T extends Ranchu> extends AgeableListModel<T> {
 
 	@Override
 	protected Iterable<ModelPart> bodyParts() {
-		return ImmutableList.of(body);
+		return ImmutableList.of(this.ranchu);
 	}
 
 
