@@ -1,7 +1,6 @@
 package coda.babyfat;
 
 import coda.babyfat.client.ClientEvents;
-import coda.babyfat.common.entities.Betta;
 import coda.babyfat.common.entities.Ranchu;
 import coda.babyfat.registry.BFBlocks;
 import coda.babyfat.registry.BFEntities;
@@ -9,7 +8,6 @@ import coda.babyfat.registry.BFFeatures;
 import coda.babyfat.registry.BFItems;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.SpawnPlacements;
-import net.minecraft.world.entity.animal.AbstractFish;
 import net.minecraft.world.level.levelgen.Heightmap;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.EntityAttributeCreationEvent;
@@ -41,12 +39,10 @@ public class BabyFat {
 
     private void registerEntityAttributes(EntityAttributeCreationEvent event) {
          event.put(BFEntities.RANCHU.get(), Ranchu.createAttributes().build());
-        event.put(BFEntities.BETTA.get(), AbstractFish.createAttributes().build());
-    }
+   }
 
     private void registerCommon(FMLCommonSetupEvent event) {
         SpawnPlacements.register(BFEntities.RANCHU.get(), SpawnPlacements.Type.IN_WATER, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Ranchu::checkFishSpawnRules);
-        SpawnPlacements.register(BFEntities.BETTA.get(), SpawnPlacements.Type.IN_WATER, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Betta::checkSurfaceWaterAnimalSpawnRules);
 
 
         event.enqueueWork(() -> {

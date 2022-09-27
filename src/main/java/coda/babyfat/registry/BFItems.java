@@ -19,6 +19,4 @@ public class BFItems {
     public static final RegistryObject<Item> RANCHU_SPAWN_EGG = ITEMS.register("ranchu_spawn_egg", () -> new ForgeSpawnEggItem(BFEntities.RANCHU, 0x736036, 0xd1a965, new Item.Properties().tab(CreativeModeTab.TAB_MISC)));
 
     //public static final RegistryObject<Item> WATER_LETTUCE = ITEMS.register("water_lettuce", () -> new WaterLilyBlockItem(BFBlocks.WATER_LETTUCE.get(), new Item.Properties().tab(CreativeModeTab.TAB_DECORATIONS)));
-    public static final RegistryObject<Item> BETTA_SPAWN_EGG = ITEMS.register("betta_spawn_egg", () -> new ForgeSpawnEggItem(BFEntities.BETTA, 0xC1ABA9, 0xE4AE89, new Item.Properties().tab(CreativeModeTab.TAB_MISC)));
-
 }

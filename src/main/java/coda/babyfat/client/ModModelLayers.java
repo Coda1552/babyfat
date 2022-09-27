@@ -9,6 +9,4 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 @OnlyIn(Dist.CLIENT)
 public class ModModelLayers {
 	public static final ModelLayerLocation RANCHU = new ModelLayerLocation(new ResourceLocation(BabyFat.MOD_ID, "ranchu"), "ranchu");
-	public static final ModelLayerLocation BETTA = new ModelLayerLocation(new ResourceLocation(BabyFat.MOD_ID, "betta"), "betta");
-
 }
