@@ -2,6 +2,7 @@ package coda.babyfat;
 
 import coda.babyfat.client.ClientEvents;
 import coda.babyfat.common.entities.Ranchu;
+import coda.babyfat.registry.BFBiomeModifiers;
 import coda.babyfat.registry.BFBlocks;
 import coda.babyfat.registry.BFEntities;
 import coda.babyfat.registry.BFFeatures;
@@ -32,6 +33,7 @@ public class BabyFat {
 		bus.addListener(this::registerFeatures);
 		forgeBus.addListener(this::onRanchuBreed);
 
+		BFBiomeModifiers.BIOME_MODIFIER_SERIALIZERS.register(bus);
 		BFItems.ITEMS.register(bus);
 		BFEntities.ENTITIES.register(bus);
 		BFBlocks.BLOCKS.register(bus);
