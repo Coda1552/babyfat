@@ -5,8 +5,11 @@ import coda.babyfat.client.model.RanchuModel;
 import coda.babyfat.client.renderer.RanchuRenderer;
 import coda.babyfat.registry.BFBlocks;
 import coda.babyfat.registry.BFEntities;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.BiomeColors;
 import net.minecraft.client.renderer.ItemBlockRenderTypes;
 import net.minecraft.client.renderer.RenderType;
+import net.minecraft.world.level.GrassColor;
 import net.minecraft.world.level.block.Block;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.EntityRenderersEvent;
@@ -18,6 +21,9 @@ public class ClientEvents {
 
 	public static void init() {
 		setRenderLayer(BFBlocks.WATER_LETTUCE.get(), RenderType.cutout());
+		Minecraft.getInstance().getBlockColors().register((p_92621_, p_92622_, p_92623_, p_92624_) -> {
+			return p_92622_ != null && p_92623_ != null ? BiomeColors.getAverageGrassColor(p_92622_, p_92623_) : GrassColor.get(0.5D, 1.0D);
+		}, BFBlocks.WATER_LETTUCE.get());
 	}
 
 	private static void setRenderLayer(Block block, RenderType type) {
