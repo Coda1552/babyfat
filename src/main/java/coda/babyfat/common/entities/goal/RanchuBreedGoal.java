@@ -89,7 +89,7 @@ public class RanchuBreedGoal extends Goal {
 
 		BlockPos blockPos = null;
 		if(this.animal.tickCount % 10 == 0) {
-			for (BlockPos blockpos1 : BlockPos.betweenClosed(Mth.floor(this.animal.getX() - 10.0D), Mth.floor(this.animal.getY() - 10.0D), Mth.floor(this.animal.getZ() - 10.0D), Mth.floor(this.animal.getX() + 10.0D), this.animal.getBlockY(), Mth.floor(this.animal.getZ() + 10.0D))) {
+			for (BlockPos blockpos1 : BlockPos.betweenClosed(Mth.floor(this.animal.getX() - 10.0D), Mth.floor(this.animal.getY() - 10.0D), Mth.floor(this.animal.getZ() - 10.0D), Mth.floor(this.animal.getX() + 10.0D), Mth.floor(this.animal.getY() + 10.0D), Mth.floor(this.animal.getZ() + 10.0D))) {
 				if (this.animal.level.getBlockState(blockpos1).is(BFBlocks.WATER_LETTUCE.get())) {
 					blockPos = blockpos1;
 					break;
