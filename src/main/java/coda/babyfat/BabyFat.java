@@ -9,6 +9,7 @@ import coda.babyfat.registry.BFFeatures;
 import coda.babyfat.registry.BFItems;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.SpawnPlacements;
+import net.minecraft.world.level.block.ComposterBlock;
 import net.minecraft.world.level.levelgen.Heightmap;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.EntityAttributeCreationEvent;
@@ -48,7 +49,7 @@ public class BabyFat {
 
 
 		event.enqueueWork(() -> {
-			//ComposterBlock.COMPOSTABLES.put(BFItems.WATER_LETTUCE.get(), 0.65F);
+			ComposterBlock.COMPOSTABLES.put(BFItems.WATER_LETTUCE.get(), 0.65F);
 		});
 	}
 
