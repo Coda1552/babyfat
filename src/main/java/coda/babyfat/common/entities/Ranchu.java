@@ -19,7 +19,14 @@ import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.damagesource.DamageSource;
-import net.minecraft.world.entity.*;
+import net.minecraft.world.entity.AgeableMob;
+import net.minecraft.world.entity.EntitySelector;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.Mob;
+import net.minecraft.world.entity.MobSpawnType;
+import net.minecraft.world.entity.MobType;
+import net.minecraft.world.entity.MoverType;
+import net.minecraft.world.entity.SpawnGroupData;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.control.SmoothSwimmingLookControl;
@@ -45,12 +52,12 @@ import net.minecraft.world.phys.Vec3;
 import javax.annotation.Nullable;
 import java.util.Random;
 
-public class RanchuEntity extends Animal {
-    public static final EntityDataAccessor<Integer> VARIANT = SynchedEntityData.defineId(RanchuEntity.class, EntityDataSerializers.INT);
-    private static final EntityDataAccessor<Boolean> FROM_BUCKET = SynchedEntityData.defineId(RanchuEntity.class, EntityDataSerializers.BOOLEAN);
+public class Ranchu extends Animal {
+    public static final EntityDataAccessor<Integer> VARIANT = SynchedEntityData.defineId(Ranchu.class, EntityDataSerializers.INT);
+    private static final EntityDataAccessor<Boolean> FROM_BUCKET = SynchedEntityData.defineId(Ranchu.class, EntityDataSerializers.BOOLEAN);
     public static final int MAX_VARIANTS = 303;
 
-    public RanchuEntity(EntityType<? extends Animal> type, Level worldIn) {
+    public Ranchu(EntityType<? extends Animal> type, Level worldIn) {
         super(type, worldIn);
         this.lookControl = new SmoothSwimmingLookControl(this, 10);
         this.moveControl = new SmoothSwimmingMoveControl(this, 85, 10, 0.02F, 0.1F, true);
@@ -72,7 +79,7 @@ public class RanchuEntity extends Animal {
 
     @Override
     public boolean isFood(ItemStack stack) {
-        return false;
+        return stack.is(BFBlocks.WATER_LETTUCE.get().asItem());
     }
 
     @Override
@@ -89,7 +96,7 @@ public class RanchuEntity extends Animal {
 
     }
 
-    public static boolean checkFishSpawnRules(EntityType<? extends RanchuEntity> type, LevelAccessor worldIn, MobSpawnType reason, BlockPos p_223363_3_, Random randomIn) {
+    public static boolean checkFishSpawnRules(EntityType<? extends Ranchu> type, LevelAccessor worldIn, MobSpawnType reason, BlockPos p_223363_3_, Random randomIn) {
         return worldIn.getBlockState(p_223363_3_).is(Blocks.WATER) && worldIn.getBlockState(p_223363_3_.above()).is(Blocks.WATER);
     }
 

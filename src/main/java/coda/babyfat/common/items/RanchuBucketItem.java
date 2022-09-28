@@ -1,6 +1,6 @@
 package coda.babyfat.common.items;
 
-import coda.babyfat.common.entities.RanchuEntity;
+import coda.babyfat.common.entities.Ranchu;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
@@ -40,7 +40,7 @@ public class RanchuBucketItem extends BucketItem {
     private void placeFish(ServerLevel worldIn, ItemStack stack, BlockPos pos) {
         Entity entity = this.fishTypeSupplier.get().spawn(worldIn, stack, (Player)null, pos, MobSpawnType.BUCKET, true, false);
         if (entity != null) {
-            ((RanchuEntity)entity).setFromBucket(true);
+            ((Ranchu)entity).setFromBucket(true);
         }
     }
 }

@@ -1,29 +1,28 @@
 package coda.babyfat.client;
 
+import coda.babyfat.BabyFat;
+import coda.babyfat.client.model.RanchuModel;
 import coda.babyfat.client.renderer.RanchuRenderer;
-import coda.babyfat.registry.BFBlocks;
 import coda.babyfat.registry.BFEntities;
-import net.minecraft.client.renderer.RenderType;
-import net.minecraft.client.renderer.RenderTypeLookup;
-import net.minecraft.client.renderer.color.IItemColor;
-import net.minecraft.client.renderer.color.ItemColors;
-import net.minecraftforge.client.event.ColorHandlerEvent;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.client.event.EntityRenderersEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.client.registry.RenderingRegistry;
+import net.minecraftforge.fml.common.Mod;
 
+@Mod.EventBusSubscriber(modid = BabyFat.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
 public class ClientEvents {
 
-    public static void init() {
-         RenderingRegistry.registerEntityRenderingHandler(BFEntities.RANCHU.get(), RanchuRenderer::new);
-         RenderingRegistry.registerEntityRenderingHandler(BFEntities.BALL.get(), BallRenderer::new);
+	public static void init() {
+	}
 
-         RenderTypeLookup.setRenderLayer(BFBlocks.WATER_LETTUCE.get(), RenderType.cutout());
-    }
+	@SubscribeEvent
+	public static void registerLayerDefinition(EntityRenderersEvent.RegisterLayerDefinitions event) {
+		event.registerLayerDefinition(ModModelLayers.RANCHU, RanchuModel::createBodyLayer);
+	}
 
-    @SubscribeEvent
-    public static void itemColors(ColorHandlerEvent.Item event) {
-         ItemColors handler = event.getItemColors();
-         IItemColor eggColor = (stack, tintIndex) -> ((BFSpawnEggItem) stack.getItem()).getColor(tintIndex);
-         for (BFSpawnEggItem e : BFSpawnEggItem.UNADDED_EGGS) handler.register(eggColor, e);
-    }
+
+	@SubscribeEvent
+	public static void registerEntityRenders(EntityRenderersEvent.RegisterRenderers event) {
+		event.registerEntityRenderer(BFEntities.RANCHU.get(), RanchuRenderer::new);
+	}
 }
