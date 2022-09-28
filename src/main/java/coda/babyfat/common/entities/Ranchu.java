@@ -79,7 +79,7 @@ public class Ranchu extends Animal {
 
 	@Override
 	public boolean isFood(ItemStack stack) {
-		return false;
+		return stack.is(BFBlocks.WATER_LETTUCE.get().asItem());
 	}
 
 	@Override
