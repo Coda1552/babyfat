@@ -124,9 +124,8 @@ public class Ranchu extends Animal implements Bucketable {
 
 	@Override
 	public void loadFromBucketTag(CompoundTag compound) {
-		if (compound.contains("Age")) {
-			this.readAdditionalSaveData(compound.getCompound("Age"));
-		}
+		this.setAge(compound.getInt("Age"));
+
 	}
 
 	@Override
@@ -321,7 +320,7 @@ public class Ranchu extends Animal implements Bucketable {
 		CompoundTag compoundnbt = bucket.getOrCreateTag();
 		compoundnbt.putInt("Variant", this.getVariant());
 		compoundnbt.putFloat("Health", this.getHealth());
-		compoundnbt.putFloat("Age", this.getAge());
+		compoundnbt.putInt("Age", this.getAge());
 		if (this.hasCustomName()) {
 			bucket.setHoverName(this.getCustomName());
 		}

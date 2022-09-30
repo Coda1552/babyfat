@@ -33,8 +33,6 @@ public class RanchuBucketItem extends MobBucketItem {
 		DistExecutor.unsafeCallWhenOn(Dist.CLIENT, () -> () -> BabyFat.CALLBACKS.add(() ->
 				ItemProperties.register(this, new ResourceLocation(BabyFat.MOD_ID, "variant"),
 						(stack, world, player, i) -> stack.hasTag() ? stack.getTag().getInt("Variant") : 0)));
-		ItemProperties.register(this, new ResourceLocation(BabyFat.MOD_ID, "age"),
-				(stack, world, player, i) -> stack.hasTag() ? stack.getTag().getInt("Age") : 1);
 	}
 
 }
