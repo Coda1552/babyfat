@@ -35,6 +35,7 @@ import net.minecraft.world.entity.ai.control.SmoothSwimmingMoveControl;
 import net.minecraft.world.entity.ai.goal.AvoidEntityGoal;
 import net.minecraft.world.entity.ai.goal.PanicGoal;
 import net.minecraft.world.entity.ai.goal.RandomSwimmingGoal;
+import net.minecraft.world.entity.ai.goal.TemptGoal;
 import net.minecraft.world.entity.ai.navigation.PathNavigation;
 import net.minecraft.world.entity.ai.navigation.WaterBoundPathNavigation;
 import net.minecraft.world.entity.animal.Animal;
@@ -42,6 +43,7 @@ import net.minecraft.world.entity.animal.Bucketable;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.LevelReader;
@@ -57,6 +59,7 @@ import java.util.Random;
 public class Ranchu extends Animal implements Bucketable {
 	public static final EntityDataAccessor<Integer> VARIANT = SynchedEntityData.defineId(Ranchu.class, EntityDataSerializers.INT);
 	private static final EntityDataAccessor<Boolean> FROM_BUCKET = SynchedEntityData.defineId(Ranchu.class, EntityDataSerializers.BOOLEAN);
+	public static final Ingredient FOOD_ITEMS = Ingredient.of(BFItems.WATER_LETTUCE.get());
 	public static final int MAX_VARIANTS = 303;
 
 	public Ranchu(EntityType<? extends Animal> type, Level worldIn) {
@@ -71,8 +74,8 @@ public class Ranchu extends Animal implements Bucketable {
 		super.registerGoals();
 		this.goalSelector.addGoal(0, new PanicGoal(this, 1.25D));
 		this.goalSelector.addGoal(1, new RanchuBreedGoal(this, 1.25D));
-		this.goalSelector.addGoal(2, new AvoidEntityGoal<>(this, Player.class, 8.0F, 1.6D, 1.4D, EntitySelector.NO_SPECTATORS::test));
-		this.goalSelector.addGoal(3, new RandomSwimmingGoal(this, 1.5, 1));
+		this.goalSelector.addGoal(2, new TemptGoal(this, 1.25D, FOOD_ITEMS, false));
+		this.goalSelector.addGoal(4, new RandomSwimmingGoal(this, 1.5, 1));
 	}
 
 	public static AttributeSupplier.Builder createAttributes() {
@@ -87,15 +90,14 @@ public class Ranchu extends Animal implements Bucketable {
 	@Nullable
 	@Override
 	public SpawnGroupData finalizeSpawn(ServerLevelAccessor worldIn, DifficultyInstance difficultyIn, MobSpawnType reason, @Nullable SpawnGroupData spawnDataIn, @Nullable CompoundTag dataTag) {
-		spawnDataIn = super.finalizeSpawn(worldIn, difficultyIn, reason, spawnDataIn, dataTag);
-		if (dataTag == null) {
-			setVariant(random.nextInt(3));
-		} else {
-			if (dataTag.contains("Variant", 3) || dataTag.contains("Age", 2)){
-				this.setVariant(dataTag.getInt("Variant"));
-			}
+		int i;
+		if(reason == MobSpawnType.SPAWN_EGG){
+			i = this.getRandom().nextInt(303);
+		}else{
+			i = this.getRandom().nextInt(3);
 		}
-		return spawnDataIn;
+		this.setVariant(i);
+		return super.finalizeSpawn(worldIn, difficultyIn, reason, spawnDataIn, dataTag);
 	}
 
 	public static boolean checkFishSpawnRules(EntityType<? extends Ranchu> type, LevelAccessor worldIn, MobSpawnType reason, BlockPos p_223363_3_, RandomSource randomIn) {
