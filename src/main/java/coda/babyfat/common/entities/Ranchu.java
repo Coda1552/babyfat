@@ -37,6 +37,7 @@ import net.minecraft.world.entity.ai.goal.RandomSwimmingGoal;
 import net.minecraft.world.entity.ai.navigation.PathNavigation;
 import net.minecraft.world.entity.ai.navigation.WaterBoundPathNavigation;
 import net.minecraft.world.entity.animal.Animal;
+import net.minecraft.world.entity.animal.Bucketable;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
@@ -52,7 +53,7 @@ import net.minecraft.world.phys.Vec3;
 import javax.annotation.Nullable;
 import java.util.Random;
 
-public class Ranchu extends Animal {
+public class Ranchu extends Animal implements Bucketable {
     public static final EntityDataAccessor<Integer> VARIANT = SynchedEntityData.defineId(Ranchu.class, EntityDataSerializers.INT);
     private static final EntityDataAccessor<Boolean> FROM_BUCKET = SynchedEntityData.defineId(Ranchu.class, EntityDataSerializers.BOOLEAN);
     public static final int MAX_VARIANTS = 303;
@@ -82,18 +83,18 @@ public class Ranchu extends Animal {
         return stack.is(BFBlocks.WATER_LETTUCE.get().asItem());
     }
 
+    @Nullable
     @Override
     public SpawnGroupData finalizeSpawn(ServerLevelAccessor worldIn, DifficultyInstance difficultyIn, MobSpawnType reason, @Nullable SpawnGroupData spawnDataIn, @Nullable CompoundTag dataTag) {
-        if (dataTag != null && (dataTag.contains("Variant", 3) || dataTag.contains("Age", 2))) {
-            this.setVariant(dataTag.getInt("Variant"));
-            setAge(dataTag.getInt("Age"));
-            return spawnDataIn;
-        }
-        else {
+        spawnDataIn = super.finalizeSpawn(worldIn, difficultyIn, reason, spawnDataIn, dataTag);
+        if (dataTag == null) {
             setVariant(random.nextInt(3));
+        } else {
+            if (dataTag.contains("Variant", 3) || dataTag.contains("Age", 2)){
+                this.setVariant(dataTag.getInt("Variant"));
+            }
         }
-        return super.finalizeSpawn(worldIn, difficultyIn, reason, spawnDataIn, dataTag);
-
+        return spawnDataIn;
     }
 
     public static boolean checkFishSpawnRules(EntityType<? extends Ranchu> type, LevelAccessor worldIn, MobSpawnType reason, BlockPos p_223363_3_, Random randomIn) {
@@ -111,8 +112,28 @@ public class Ranchu extends Animal {
         return this.entityData.get(FROM_BUCKET);
     }
 
+    @Override
+    public boolean fromBucket() {
+        return this.entityData.get(FROM_BUCKET);
+    }
+
     public void setFromBucket(boolean p_203706_1_) {
         this.entityData.set(FROM_BUCKET, p_203706_1_);
+    }
+
+    @Override
+    public void loadFromBucketTag(CompoundTag p_148832_) {
+
+    }
+
+    @Override
+    public ItemStack getBucketItemStack() {
+        return new ItemStack(BFItems.RANCHU_BUCKET.get());
+    }
+
+    @Override
+    public SoundEvent getPickupSound() {
+        return SoundEvents.BUCKET_EMPTY_FISH;
     }
 
     public int getVariant() {
@@ -138,6 +159,7 @@ public class Ranchu extends Animal {
         super.addAdditionalSaveData(compound);
         compound.putInt("Variant", getVariant());
         compound.putBoolean("FromBucket", this.isFromBucket());
+        compound.putBoolean("Bucketed", this.fromBucket());
     }
 
     @Override
@@ -145,6 +167,7 @@ public class Ranchu extends Animal {
         super.readAdditionalSaveData(compound);
         setVariant(Mth.clamp(compound.getInt("Variant"), 0, MAX_VARIANTS));
         this.setFromBucket(compound.getBoolean("FromBucket"));
+        this.setFromBucket(compound.getBoolean("Bucketed"));
     }
 
     @Override
@@ -284,37 +307,19 @@ public class Ranchu extends Animal {
         return new ItemStack(BFItems.RANCHU_SPAWN_EGG.get());
     }
 
-    @Override
-    public InteractionResult mobInteract(Player p_230254_1_, InteractionHand p_230254_2_) {
-        ItemStack itemstack = p_230254_1_.getItemInHand(p_230254_2_);
-        if (itemstack.getItem() == Items.WATER_BUCKET && this.isAlive()) {
-            this.playSound(SoundEvents.BUCKET_FILL_FISH, 1.0F, 1.0F);
-            itemstack.shrink(1);
-            ItemStack itemstack1 = new ItemStack(BFItems.RANCHU_BUCKET.get());
-            this.setBucketData(itemstack1);
-            if (!this.level.isClientSide) {
-                itemstack1.getOrCreateTag().putInt("Age", getAge());
-                CriteriaTriggers.FILLED_BUCKET.trigger((ServerPlayer)p_230254_1_, itemstack1);
-            }
 
-            if (itemstack.isEmpty()) {
-                p_230254_1_.setItemInHand(p_230254_2_, itemstack1);
-            } else if (!p_230254_1_.getInventory().add(itemstack1)) {
-                p_230254_1_.drop(itemstack1, false);
-            }
-
-            this.discard();
-            return InteractionResult.sidedSuccess(this.level.isClientSide);
-        } else {
-            return super.mobInteract(p_230254_1_, p_230254_2_);
-        }
+    public InteractionResult mobInteract(Player p_27477_, InteractionHand p_27478_) {
+        return Bucketable.bucketMobPickup(p_27477_, p_27478_, this).orElse(super.mobInteract(p_27477_, p_27478_));
     }
 
-    protected void setBucketData(ItemStack bucket) {
+    @Override
+    public void saveToBucketTag(ItemStack bucket) {
+        CompoundTag compoundnbt = bucket.getOrCreateTag();
+        compoundnbt.putInt("Variant", this.getVariant());
         if (this.hasCustomName()) {
             bucket.setHoverName(this.getCustomName());
         }
-        CompoundTag compoundnbt = bucket.getOrCreateTag();
-        compoundnbt.putInt("Variant", this.getVariant());
+        compoundnbt.putFloat("Health", this.getHealth());
     }
+
 }

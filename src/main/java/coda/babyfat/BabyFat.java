@@ -8,6 +8,8 @@ import coda.babyfat.registry.BFFeatures;
 import coda.babyfat.registry.BFItems;
 import net.minecraft.world.entity.MobCategory;
 import net.minecraft.world.entity.SpawnPlacements;
+import net.minecraft.world.item.CreativeModeTab;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.biome.MobSpawnSettings;
 import net.minecraft.world.level.block.ComposterBlock;
@@ -23,11 +25,14 @@ import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 @Mod(BabyFat.MOD_ID)
 public class BabyFat {
     public static final String MOD_ID = "babyfat";
+    public static final List<Runnable> CALLBACKS = new ArrayList<>();
 
     public BabyFat() {
         IEventBus bus = FMLJavaModLoadingContext.get().getModEventBus();
@@ -111,4 +116,12 @@ public class BabyFat {
     private void registerClient(FMLClientSetupEvent event) {
         ClientEvents.init();
     }
+
+    public static final CreativeModeTab BABY_FAT = new CreativeModeTab(MOD_ID) {
+        @Override
+        public ItemStack makeIcon() {
+            return BFItems.RANCHU.get().getDefaultInstance();
+        }
+    };
+
 }
