@@ -122,7 +122,8 @@ public class Ranchu extends Animal implements Bucketable {
     }
 
     @Override
-    public void loadFromBucketTag(CompoundTag p_148832_) {
+    public void loadFromBucketTag(CompoundTag compound) {
+        this.setAge(compound.getInt("Age"));
 
     }
 
@@ -310,16 +311,19 @@ public class Ranchu extends Animal implements Bucketable {
 
     public InteractionResult mobInteract(Player p_27477_, InteractionHand p_27478_) {
         return Bucketable.bucketMobPickup(p_27477_, p_27478_, this).orElse(super.mobInteract(p_27477_, p_27478_));
+
     }
 
     @Override
     public void saveToBucketTag(ItemStack bucket) {
         CompoundTag compoundnbt = bucket.getOrCreateTag();
         compoundnbt.putInt("Variant", this.getVariant());
+        compoundnbt.putFloat("Health", this.getHealth());
+        compoundnbt.putInt("Age", this.getAge());
         if (this.hasCustomName()) {
             bucket.setHoverName(this.getCustomName());
         }
-        compoundnbt.putFloat("Health", this.getHealth());
     }
 
 }
+
