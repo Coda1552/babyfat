@@ -25,6 +25,11 @@ public class RanchuRenderer<T extends Ranchu> extends MobRenderer<T, RanchuModel
 	public ResourceLocation getTextureLocation(T entity) {
 		int variant = entity.getVariant() + 1;
 		ResourceLocation loc = new ResourceLocation(BabyFat.MOD_ID, "textures/entity/ranchu/ranchu_" + variant + ".png");
+		if(variant > 303){
+			ResourceLocation loc2 = new ResourceLocation(BabyFat.MOD_ID, "textures/entity/ranchu/ranchu_1.png");
+
+			return loc2;
+		}
 		return TEXTURES[variant] = loc;
 	}
 
