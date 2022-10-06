@@ -143,7 +143,7 @@ public class Ranchu extends Animal {
     @Override
     public void readAdditionalSaveData(CompoundTag compound) {
         super.readAdditionalSaveData(compound);
-        setVariant(Mth.clamp(compound.getInt("Variant"), 0, MAX_VARIANTS));
+        setVariant(Mth.clamp(compound.getInt("Variant"), 0, MAX_VARIANTS - 1));
         this.setFromBucket(compound.getBoolean("FromBucket"));
     }
 
