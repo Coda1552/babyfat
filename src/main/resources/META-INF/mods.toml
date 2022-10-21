@@ -6,6 +6,6 @@ modId="babyfat" #mandatory
 version="${file.jarVersion}" #mandatory
 displayName="Baby Fat" #mandatory
 credits="Tazz, Vaky" #optional
-authors="Coda" #optional
+authors="Coda, bagu_chan, Team Fusion" #optional
 description='''
 Baby Fat is a ranchu mod.'''
