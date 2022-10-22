@@ -10,9 +10,12 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.MobRenderer;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.packs.resources.Resource;
 import net.minecraft.util.Mth;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
+
+import java.io.IOException;
 
 @OnlyIn(Dist.CLIENT)
 public class RanchuRenderer<T extends Ranchu> extends MobRenderer<T, RanchuModel<T>> {
@@ -28,10 +31,15 @@ public class RanchuRenderer<T extends Ranchu> extends MobRenderer<T, RanchuModel
 		int variant = entity.getVariant() + 1;
 		if (TEXTURES[variant - 1] == null) {
 			ResourceLocation loc = new ResourceLocation(BabyFat.MOD_ID, "textures/entity/ranchu/ranchu_" + variant + ".png");
-			if (!Minecraft.getInstance().getResourceManager().getResource(loc).isPresent()) {
-				System.out.println("Found Unknown variant " + variant + ", using default");
-				loc = DEFAULT_TEXTURES;
-				return loc;
+			try {
+				Resource resource = Minecraft.getInstance().getResourceManager().getResource(loc);
+				if (resource != null) {
+					System.out.println("Found Unknown variant " + variant + ", using default");
+					loc = DEFAULT_TEXTURES;
+					return loc;
+				}
+			} catch (IOException e) {
+				throw new RuntimeException(e);
 			}
 
 			return TEXTURES[variant - 1] = loc;
