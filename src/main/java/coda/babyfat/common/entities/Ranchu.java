@@ -91,9 +91,9 @@ public class Ranchu extends Animal implements Bucketable {
 		}
 		int i;
 		if(reason == MobSpawnType.SPAWN_EGG){
-			i = this.getRandom().nextInt(302);
+			i = worldIn.getRandom().nextInt(302);
 		}else{
-			i = this.getRandom().nextInt(3);
+			i = worldIn.getRandom().nextInt(3);
 		}
 		this.setVariant(i);
 		return super.finalizeSpawn(worldIn, difficultyIn, reason, spawnDataIn, dataTag);
