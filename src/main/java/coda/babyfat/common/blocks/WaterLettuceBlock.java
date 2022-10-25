@@ -1,8 +1,14 @@
 package coda.babyfat.common.blocks;
 
+import coda.babyfat.registry.BFBlocks;
 import net.minecraft.core.BlockPos;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.tags.BlockTags;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.BlockGetter;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.BonemealableBlock;
 import net.minecraft.world.level.block.BushBlock;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
@@ -14,7 +20,7 @@ import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import net.minecraftforge.common.PlantType;
 
-public class WaterLettuceBlock extends BushBlock {
+public class WaterLettuceBlock extends BushBlock implements BonemealableBlock {
 	protected static final VoxelShape AABB = Block.box(4.0D, -2.0D, 4.0D, 12.0D, 4.0D, 12.0D);
 
 	public WaterLettuceBlock(BlockBehaviour.Properties p_i48297_1_) {
@@ -39,5 +45,53 @@ public class WaterLettuceBlock extends BushBlock {
 
 	public BlockBehaviour.OffsetType getOffsetType() {
 		return BlockBehaviour.OffsetType.XZ;
+	}
+
+	@Override
+	public boolean isValidBonemealTarget(BlockGetter p_55002_, BlockPos p_55003_, BlockState p_55004_, boolean p_55005_) {
+		if (!p_55002_.getBlockState(p_55003_.above()).propagatesSkylightDown(p_55002_, p_55003_)) {
+			return false;
+		} else {
+			for(BlockPos blockpos : BlockPos.betweenClosed(p_55003_.offset(-1, -1, -1), p_55003_.offset(1, 1, 1))) {
+				if (p_55002_.getBlockState(blockpos).is(BlockTags.NYLIUM)) {
+					return true;
+				}
+			}
+
+			return false;
+		}
+	}
+
+	public boolean isBonemealSuccess(Level p_221816_, RandomSource p_221817_, BlockPos p_221818_, BlockState p_221819_) {
+		return true;
+	}
+
+	public void performBonemeal(ServerLevel p_221811_, RandomSource p_221812_, BlockPos p_221813_, BlockState p_221814_) {
+		boolean flag = false;
+		boolean flag1 = false;
+
+		for(BlockPos blockpos : BlockPos.betweenClosed(p_221813_.offset(-1, 0, -1), p_221813_.offset(1, 0, 1))) {
+			BlockState blockstate = p_221811_.getBlockState(blockpos);
+
+			if(blockstate.isAir() && BFBlocks.WATER_LETTUCE.get().defaultBlockState().canSurvive(p_221811_, blockpos)){
+				if(!flag1){
+					p_221811_.setBlock(blockpos, BFBlocks.WATER_LETTUCE.get().defaultBlockState(), 3);
+					flag1 = true;
+					continue;
+				}
+
+				if(!flag){
+					p_221811_.setBlock(blockpos, BFBlocks.WATER_LETTUCE.get().defaultBlockState(), 3);
+					flag = true;
+					continue;
+				}
+
+				if(flag && flag1){
+					break;
+				}
+			}
+
+		}
+
 	}
 }
