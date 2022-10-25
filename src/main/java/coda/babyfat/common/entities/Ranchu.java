@@ -49,6 +49,7 @@ import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
 
 import javax.annotation.Nullable;
+import java.util.Optional;
 
 public class Ranchu extends Animal implements Bucketable {
 	public static final EntityDataAccessor<Integer> VARIANT = SynchedEntityData.defineId(Ranchu.class, EntityDataSerializers.INT);
@@ -277,8 +278,34 @@ public class Ranchu extends Animal implements Bucketable {
 
 	@Nullable
 	@Override
-	public AgeableMob getBreedOffspring(ServerLevel p_241840_1_, AgeableMob p_241840_2_) {
-		return BFEntities.RANCHU.get().create(p_241840_1_);
+	public Ranchu getBreedOffspring(ServerLevel p_241840_1_, AgeableMob ranchuB) {
+			Ranchu child = BFEntities.RANCHU.get().create(p_241840_1_);
+			RandomSource rand = this.getRandom();
+		if (ranchuB instanceof Ranchu) {
+			// Feral + Feral
+			if (this.getVariant() <= 2 && ((Ranchu) ranchuB).getVariant() <= 2) {
+				if (rand.nextFloat() < 0.15) {
+					child.setVariant(rand.nextInt(Ranchu.MAX_VARIANTS - 3) + 3);
+				} else {
+					child.setVariant(rand.nextInt(3) + 1);
+				}
+			}
+
+			// Fancy + Fancy
+			else if (this.getVariant() > 2 && ((Ranchu) ranchuB).getVariant() > 2) {
+				child.setVariant(rand.nextInt(Ranchu.MAX_VARIANTS - 3) + 3);
+			}
+
+			// Feral + Fancy
+			else if (this.getVariant() <= 2 || ((Ranchu) ranchuB).getVariant() <= 2 && this.getVariant() > 2 || ((Ranchu) ranchuB).getVariant() > 2) {
+				if (rand.nextBoolean()) {
+					child.setVariant(rand.nextInt(Ranchu.MAX_VARIANTS - 3) + 3);
+				} else {
+					child.setVariant(rand.nextInt(3) + 1);
+				}
+			}
+		}
+		return child;
 	}
 
 	@Override
@@ -305,10 +332,34 @@ public class Ranchu extends Animal implements Bucketable {
 		return new ItemStack(BFItems.RANCHU_SPAWN_EGG.get());
 	}
 
-
 	public InteractionResult mobInteract(Player p_27477_, InteractionHand p_27478_) {
-		return Bucketable.bucketMobPickup(p_27477_, p_27478_, this).orElse(super.mobInteract(p_27477_, p_27478_));
+		Optional<InteractionResult> result = Bucketable.bucketMobPickup(p_27477_, p_27478_, this);
 
+		if(result.isPresent() && result.get().consumesAction()){
+			return result.get();
+		}else {
+			ItemStack itemstack = p_27477_.getItemInHand(p_27478_);
+			if (this.isFood(itemstack)) {
+				int i = this.getAge();
+				if (!this.level.isClientSide && i == 0 && this.canFallInLove()) {
+					this.usePlayerItem(p_27477_, p_27478_, itemstack);
+					this.setInLove(p_27477_);
+					this.setInLoveTime(24000);
+					return InteractionResult.SUCCESS;
+				}
+
+				if (this.isBaby()) {
+					this.usePlayerItem(p_27477_, p_27478_, itemstack);
+					this.ageUp(getSpeedUpSecondsWhenFeeding(-i), true);
+					return InteractionResult.sidedSuccess(this.level.isClientSide);
+				}
+
+				if (this.level.isClientSide) {
+					return InteractionResult.CONSUME;
+				}
+			}
+		}
+		return super.mobInteract(p_27477_, p_27478_);
 	}
 
 	@Override
