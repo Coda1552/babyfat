@@ -85,6 +85,10 @@ public class Ranchu extends Animal implements Bucketable {
 	@Nullable
 	@Override
 	public SpawnGroupData finalizeSpawn(ServerLevelAccessor worldIn, DifficultyInstance difficultyIn, MobSpawnType reason, @Nullable SpawnGroupData spawnDataIn, @Nullable CompoundTag dataTag) {
+
+		if (reason == MobSpawnType.BUCKET) {
+			return spawnDataIn;
+		}
 		int i;
 		if(reason == MobSpawnType.SPAWN_EGG){
 			i = this.getRandom().nextInt(302);
@@ -121,8 +125,17 @@ public class Ranchu extends Animal implements Bucketable {
 
 	@Override
 	public void loadFromBucketTag(CompoundTag compound) {
+		Bucketable.loadDefaultDataFromBucketTag(this, compound);
+		this.setVariant(compound.getInt("Variant"));
 		this.setAge(compound.getInt("Age"));
+	}
 
+	@Override
+	public void saveToBucketTag(ItemStack bucket) {
+		CompoundTag compoundnbt = bucket.getOrCreateTag();
+		Bucketable.saveDefaultDataToBucketTag(this, bucket);
+		compoundnbt.putInt("Variant", this.getVariant());
+		compoundnbt.putInt("Age", this.getAge());
 	}
 
 	@Override
@@ -366,17 +379,6 @@ public class Ranchu extends Animal implements Bucketable {
 			}
 		}
 		return super.mobInteract(p_27477_, p_27478_);
-	}
-
-	@Override
-	public void saveToBucketTag(ItemStack bucket) {
-		CompoundTag compoundnbt = bucket.getOrCreateTag();
-		compoundnbt.putInt("Variant", this.getVariant());
-		compoundnbt.putFloat("Health", this.getHealth());
-		compoundnbt.putInt("Age", this.getAge());
-		if (this.hasCustomName()) {
-			bucket.setHoverName(this.getCustomName());
-		}
 	}
 
 }
