@@ -68,7 +68,9 @@ public class RanchuBreedGoal extends Goal {
         if (this.spawnBabyDelay >= 60 && this.animal.distanceToSqr(this.targetMate) < 9.0D) {
             this.spawnBaby();
         }
-
+        if (this.animal.tickCount % 20 == 0) {
+            this.animal.level.broadcastEntityEvent(this.animal, (byte) 18);
+        }
     }
 
     @Nullable
