@@ -79,8 +79,6 @@ public class WaterLettuceBlock extends BushBlock implements BonemealableBlock {
 					break;
 				}
 			}
-
 		}
-
 	}
 }
