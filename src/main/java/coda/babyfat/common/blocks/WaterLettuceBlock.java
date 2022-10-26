@@ -3,7 +3,6 @@ package coda.babyfat.common.blocks;
 import coda.babyfat.registry.BFBlocks;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
-import net.minecraft.tags.BlockTags;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
@@ -49,17 +48,7 @@ public class WaterLettuceBlock extends BushBlock implements BonemealableBlock {
 
 	@Override
 	public boolean isValidBonemealTarget(BlockGetter p_55002_, BlockPos p_55003_, BlockState p_55004_, boolean p_55005_) {
-		if (!p_55002_.getBlockState(p_55003_.above()).propagatesSkylightDown(p_55002_, p_55003_)) {
-			return false;
-		} else {
-			for(BlockPos blockpos : BlockPos.betweenClosed(p_55003_.offset(-1, -1, -1), p_55003_.offset(1, 1, 1))) {
-				if (p_55002_.getBlockState(blockpos).is(BlockTags.NYLIUM)) {
-					return true;
-				}
-			}
-
-			return false;
-		}
+		return true;
 	}
 
 	public boolean isBonemealSuccess(Level p_221816_, RandomSource p_221817_, BlockPos p_221818_, BlockState p_221819_) {
@@ -74,13 +63,13 @@ public class WaterLettuceBlock extends BushBlock implements BonemealableBlock {
 			BlockState blockstate = p_221811_.getBlockState(blockpos);
 
 			if(blockstate.isAir() && BFBlocks.WATER_LETTUCE.get().defaultBlockState().canSurvive(p_221811_, blockpos)){
-				if(!flag1){
+				if(!flag1 && p_221812_.nextBoolean()){
 					p_221811_.setBlock(blockpos, BFBlocks.WATER_LETTUCE.get().defaultBlockState(), 3);
 					flag1 = true;
 					continue;
 				}
 
-				if(!flag){
+				if(!flag && p_221812_.nextBoolean()){
 					p_221811_.setBlock(blockpos, BFBlocks.WATER_LETTUCE.get().defaultBlockState(), 3);
 					flag = true;
 					continue;
