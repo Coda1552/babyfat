@@ -71,8 +71,6 @@ public class RanchuBreedGoal extends Goal {
 		if (this.animal.tickCount % 20 == 0) {
 			this.animal.level.broadcastEntityEvent(this.animal, (byte) 18);
 		}
-
-
 	}
 
 	@Nullable
