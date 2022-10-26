@@ -1,10 +1,7 @@
 package coda.babyfat.common.entities.goal;
 
 import coda.babyfat.common.entities.Ranchu;
-import coda.babyfat.registry.BFBlocks;
-import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
-import net.minecraft.util.Mth;
 import net.minecraft.world.entity.ai.goal.Goal;
 import net.minecraft.world.entity.ai.targeting.TargetingConditions;
 import net.minecraft.world.level.Level;
@@ -41,10 +38,9 @@ public class RanchuBreedGoal extends Goal {
 
 		long time = this.animal.level.getLevelData().getDayTime();
 
-
 		if (!this.animal.isInLove() || this.animal.isBaby() || time % 24000 <= 23000) {
 			return false;
-		} else if (list.size() < 6 && getNearbyWaterLettuce() != null) {
+		} else if (list.size() < 6) {
 			this.targetMate = this.getNearbyMate();
 			return this.targetMate != null;
 		} else {
@@ -87,20 +83,6 @@ public class RanchuBreedGoal extends Goal {
 		}
 
 		return animalentity;
-	}
-
-	@Nullable
-	private BlockPos getNearbyWaterLettuce() {
-
-		BlockPos blockPos = null;
-			for (BlockPos blockpos1 : BlockPos.betweenClosed(Mth.floor(this.animal.getX() - 10.0D), Mth.floor(this.animal.getY() - 10.0D), Mth.floor(this.animal.getZ() - 10.0D), Mth.floor(this.animal.getX() + 10.0D), Mth.floor(this.animal.getY() + 10.0D), Mth.floor(this.animal.getZ() + 10.0D))) {
-				if (this.animal.level.getBlockState(blockpos1).is(BFBlocks.WATER_LETTUCE.get())) {
-					blockPos = blockpos1;
-					break;
-				}
-			}
-
-		return blockPos;
 	}
 
 	protected void spawnBaby() {
