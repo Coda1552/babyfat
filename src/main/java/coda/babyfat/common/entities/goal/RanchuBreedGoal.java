@@ -44,7 +44,7 @@ public class RanchuBreedGoal extends Goal {
 
         if (!this.animal.isInLove() || this.animal.isBaby() || time % 24000 <= 23000) {
             return false;
-        } else if (list.size() < 6 && getNearbyWaterLettuce() != null) {
+        } else if (list.size() < 6) {
             this.targetMate = this.getNearbyMate();
             return this.targetMate != null;
         } else {
