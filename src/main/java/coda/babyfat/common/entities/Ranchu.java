@@ -247,11 +247,6 @@ public class Ranchu extends Animal implements Bucketable {
 		if (canFindLettuce() && time % 24000 > 23000 && !this.isBaby()) {
 			setInLoveTime(40);
 		}
-		if (!this.level.isClientSide) {
-			if (this.isInLove() && this.tickCount % 20 == 0) {
-				this.level.broadcastEntityEvent(this, (byte) 18);
-			}
-		}
 
 		super.aiStep();
 	}
