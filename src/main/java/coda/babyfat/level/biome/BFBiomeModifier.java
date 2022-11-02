@@ -21,7 +21,7 @@ public class BFBiomeModifier implements BiomeModifier {
 	public void modify(Holder<Biome> biome, Phase phase, ModifiableBiomeInfo.BiomeInfo.Builder builder) {
 		if (phase == Phase.ADD) {
 			if (biome.is(BiomeTags.IS_OVERWORLD) && biome.is(BiomeTags.IS_RIVER)) {
-				builder.getMobSpawnSettings().addSpawn(MobCategory.WATER_CREATURE, new MobSpawnSettings.SpawnerData(BFEntities.RANCHU.get(), 3, 1, 1));
+				builder.getMobSpawnSettings().addSpawn(MobCategory.WATER_AMBIENT, new MobSpawnSettings.SpawnerData(BFEntities.RANCHU.get(), 3, 2, 4));
 			}
 			if (biome.is(Biomes.SAVANNA)) {
 				builder.getGenerationSettings().addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, BFFeatures.PATCH_WATER_LETTUCE);
