@@ -209,7 +209,7 @@ public class Ranchu extends Animal implements Bucketable {
 
     @Override
     public boolean removeWhenFarAway(double p_213397_1_) {
-        return false;
+        return !this.fromBucket() && !this.hasCustomName();
     }
 
     @Override
@@ -302,6 +302,7 @@ public class Ranchu extends Animal implements Bucketable {
                 }
             }
         }
+        child.setPersistenceRequired();
         return child;
     }
 

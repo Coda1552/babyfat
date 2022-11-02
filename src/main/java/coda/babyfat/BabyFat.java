@@ -17,7 +17,6 @@ import net.minecraft.world.level.levelgen.GenerationStep;
 import net.minecraft.world.level.levelgen.Heightmap;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.EntityAttributeCreationEvent;
-import net.minecraftforge.event.entity.living.BabyEntitySpawnEvent;
 import net.minecraftforge.event.world.BiomeLoadingEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.common.Mod;
@@ -27,7 +26,6 @@ import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
 @Mod(BabyFat.MOD_ID)
 public class BabyFat {
@@ -42,7 +40,6 @@ public class BabyFat {
         bus.addListener(this::registerEntityAttributes);
         bus.addListener(this::registerCommon);
         bus.addListener(this::registerFeatures);
-        forgeBus.addListener(this::onRanchuBreed);
         forgeBus.addListener(this::onBiomeLoading);
 
         BFItems.ITEMS.register(bus);
@@ -68,48 +65,10 @@ public class BabyFat {
 
     private void onBiomeLoading(BiomeLoadingEvent event) {
         if (event.getCategory() == Biome.BiomeCategory.RIVER) {
-            event.getSpawns().getSpawner(MobCategory.WATER_CREATURE).add(new MobSpawnSettings.SpawnerData(BFEntities.RANCHU.get(), 1, 1, 1));
+            event.getSpawns().getSpawner(MobCategory.WATER_AMBIENT).add(new MobSpawnSettings.SpawnerData(BFEntities.RANCHU.get(), 1, 1, 1));
         }
         if (event.getName().getPath().equals("savanna")) {
             event.getGeneration().addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, BFFeatures.PATCH_WATER_LETTUCE);
-        }
-    }
-
-    private void onRanchuBreed(BabyEntitySpawnEvent event) {
-        if (event.getParentA() instanceof Ranchu && event.getParentB() instanceof Ranchu) {
-            Ranchu ranchuA = (Ranchu) event.getParentA();
-            Ranchu ranchuB = (Ranchu) event.getParentB();
-            Ranchu child = (Ranchu) event.getChild();
-            Random rand = ranchuA.getRandom();
-
-            // Feral + Feral
-            if (ranchuA.getVariant() <= 2 && ranchuB.getVariant() <= 2) {
-                if (rand.nextFloat() < 0.15) {
-                    child.setVariant(rand.nextInt(Ranchu.MAX_VARIANTS - 3) + 3);
-                }
-                else {
-                    child.setVariant(rand.nextInt(3) + 1);
-                }
-            }
-
-            // Fancy + Fancy
-            else if (ranchuA.getVariant() > 2 && ranchuB.getVariant() > 2) {
-                child.setVariant(rand.nextInt(Ranchu.MAX_VARIANTS - 3) + 3);
-            }
-
-            // Feral + Fancy
-            else if (ranchuA.getVariant() <= 2 || ranchuB.getVariant() <= 2 && ranchuA.getVariant() > 2 || ranchuB.getVariant() > 2) {
-                if (rand.nextBoolean()) {
-                    child.setVariant(rand.nextInt(Ranchu.MAX_VARIANTS - 3) + 3);
-                }
-                else {
-                    child.setVariant(rand.nextInt(3) + 1);
-                }
-            }
-
-            child.copyPosition(ranchuA);
-            child.setBaby(true);
-            ranchuA.getCommandSenderWorld().addFreshEntity(child);
         }
     }
 
