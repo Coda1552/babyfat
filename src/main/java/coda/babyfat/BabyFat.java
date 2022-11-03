@@ -65,7 +65,7 @@ public class BabyFat {
 
     private void onBiomeLoading(BiomeLoadingEvent event) {
         if (event.getCategory() == Biome.BiomeCategory.RIVER) {
-            event.getSpawns().getSpawner(MobCategory.WATER_AMBIENT).add(new MobSpawnSettings.SpawnerData(BFEntities.RANCHU.get(), 1, 1, 1));
+            event.getSpawns().getSpawner(MobCategory.WATER_CREATURE).add(new MobSpawnSettings.SpawnerData(BFEntities.RANCHU.get(), 1, 1, 1));
         }
         if (event.getName().getPath().equals("savanna")) {
             event.getGeneration().addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, BFFeatures.PATCH_WATER_LETTUCE);
