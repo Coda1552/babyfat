@@ -1,0 +1,17 @@
+{
+  "name": "基礎",
+  "icon": "babyfat:ranchu",
+  "category": "babyfat:baby_fat_101",
+  "pages": [
+    {
+      "type": "patchouli:entity",
+      "entity": "babyfat:ranchu",
+      "text": "ランチュウについてご紹介します！この魚には、どんな水槽も似合います。",
+      "offset": -0.3
+    },
+    {
+      "type": "patchouli:text",
+      "text": "なかなかユニークな小魚です。川のバイオームで見つけることができ、バケツに入れて運ぶことができます。しかし普通の魚と違い、適切な条件下で繁殖し、かわいいランチュウの赤ちゃんを生み落とします！"
+    }
+  ]
+}
