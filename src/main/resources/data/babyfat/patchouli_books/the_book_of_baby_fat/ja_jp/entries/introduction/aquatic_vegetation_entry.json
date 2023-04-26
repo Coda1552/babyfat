@@ -1,0 +1,19 @@
+{
+  "name": "水生植物",
+  "icon": "babyfat:water_lettuce",
+  "category": "babyfat:baby_fat_101",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "ボタンウキクサのような新しい植物が世界中に分布しています。ボタンウキクサはサバンナに自生する浮草で、性質はスイレンに似ています。これが近くにないとランチュウは繁殖出来ません。"
+    },
+    {
+      "type": "patchouli:image",
+      "images": [
+        "babyfat:textures/gui/entries/savanna.png"
+      ],
+      "border": true,
+      "text": "ボタンウキクサはサバンナに自生します！"
+    }
+  ]
+}
