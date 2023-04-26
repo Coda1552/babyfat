@@ -1,0 +1,29 @@
+{
+  "name": "千差万別",
+  "icon": "babyfat:ranchu_bucket",
+  "category": "babyfat:baby_fat_101",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "一見地味なランチュウですが、カラーバリエーションは100種類以上、尻尾のバリエーションは3種類以上。合計300種類以上のバリエーションを持ちます！多くの場合、最初に見かけるのはベージュのような色の個体でしょう。しかし、繁殖を繰り返すことで美しい色を発見できます。赤、黒、橙、白、他にもいろいろ...。"
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "babyfat:ranchu{Variant:270}",
+      "text": "橙と白のランチュウ。黒縞と短い尾が特徴です。",
+      "offset": -0.3
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "babyfat:ranchu{Variant:296}",
+      "text": "黒のランチュウ。白色のアクセントと中くらいの尾が特徴です。",
+      "offset": -0.3
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "babyfat:ranchu{Variant:256}",
+      "text": "赤と白のランチュウ。黒縞と長い尾が特徴です。",
+      "offset": -0.3
+    }
+  ]
+}
