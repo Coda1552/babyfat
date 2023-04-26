@@ -1,0 +1,19 @@
+{
+  "name": "鳥と蜜蜂",
+  "icon": "minecraft:wheat",
+  "category": "babyfat:baby_fat_101",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "ランチュウは他の魚と違って繁殖が可能です。しかし、同じように繁殖できる他の動物と違い、繁殖に適切な環境を用意する必要があります。早朝、付近に居るランチュウが5匹未満であれば自然に繁殖します！"
+    },
+    {
+      "type": "patchouli:image",
+      "images": [
+        "babyfat:textures/gui/entries/sunrise.png"
+      ],
+      "border": true,
+      "text": "ランチュウの繁殖に適切な時間帯、早朝の様子です！"
+    }
+  ]
+}
