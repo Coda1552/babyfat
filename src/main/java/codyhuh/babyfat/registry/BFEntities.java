@@ -1,7 +1,7 @@
-package coda.babyfat.registry;
+package codyhuh.babyfat.registry;
 
-import coda.babyfat.BabyFat;
-import coda.babyfat.common.entities.Ranchu;
+import codyhuh.babyfat.BabyFat;
+import codyhuh.babyfat.common.entities.Ranchu;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobCategory;

@@ -1,6 +1,6 @@
-package coda.babyfat.common.entities.goal;
+package codyhuh.babyfat.common.entities.goal;
 
-import coda.babyfat.common.entities.Ranchu;
+import codyhuh.babyfat.common.entities.Ranchu;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.ai.goal.Goal;
 import net.minecraft.world.entity.ai.targeting.TargetingConditions;
@@ -25,18 +25,18 @@ public class RanchuBreedGoal extends Goal {
 
 	public RanchuBreedGoal(Ranchu animal, double moveSpeed, Class<? extends Ranchu> mateClass) {
 		this.animal = animal;
-		this.world = animal.level;
+		this.world = animal.level();
 		this.mateClass = mateClass;
 		this.moveSpeed = moveSpeed;
 		this.setFlags(EnumSet.of(Goal.Flag.MOVE, Goal.Flag.LOOK));
 	}
 
 	public boolean canUse() {
-		List<? extends Ranchu> list = animal.level.getNearbyEntities(this.mateClass, PARTNER_TARGETING, this.animal, this.animal.getBoundingBox().inflate(8.0D));
+		List<? extends Ranchu> list = animal.level().getNearbyEntities(this.mateClass, PARTNER_TARGETING, this.animal, this.animal.getBoundingBox().inflate(8.0D));
 
 		assert !this.animal.isBaby();
 
-		long time = this.animal.level.getLevelData().getDayTime();
+		long time = this.animal.level().getLevelData().getDayTime();
 
 		if (!this.animal.isInLove() || this.animal.isBaby() || time % 24000 <= 23000) {
 			return false;
@@ -65,7 +65,7 @@ public class RanchuBreedGoal extends Goal {
 			this.spawnBaby();
 		}
 		if (this.animal.tickCount % 20 == 0) {
-			this.animal.level.broadcastEntityEvent(this.animal, (byte) 18);
+			this.animal.level().broadcastEntityEvent(this.animal, (byte) 18);
 		}
 	}
 

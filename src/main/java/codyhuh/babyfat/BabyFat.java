@@ -1,12 +1,8 @@
-package coda.babyfat;
+package codyhuh.babyfat;
 
-import coda.babyfat.client.ClientEvents;
-import coda.babyfat.common.entities.Ranchu;
-import coda.babyfat.registry.BFBiomeModifiers;
-import coda.babyfat.registry.BFBlocks;
-import coda.babyfat.registry.BFEntities;
-import coda.babyfat.registry.BFFeatures;
-import coda.babyfat.registry.BFItems;
+import codyhuh.babyfat.client.ClientEvents;
+import codyhuh.babyfat.common.entities.Ranchu;
+import codyhuh.babyfat.registry.*;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.SpawnPlacements;
 import net.minecraft.world.item.CreativeModeTab;
@@ -30,7 +26,6 @@ public class BabyFat {
 	public static final String MOD_ID = "babyfat";
 	public static final List<Runnable> CALLBACKS = new ArrayList<>();
 
-
 	public BabyFat() {
 		IEventBus bus = FMLJavaModLoadingContext.get().getModEventBus();
 		IEventBus forgeBus = MinecraftForge.EVENT_BUS;
@@ -38,13 +33,12 @@ public class BabyFat {
 		bus.addListener(this::registerClient);
 		bus.addListener(this::registerEntityAttributes);
 		bus.addListener(this::registerCommon);
-		bus.addListener(this::registerFeatures);
 		forgeBus.addListener(this::onRanchuBreed);
 
-		BFBiomeModifiers.BIOME_MODIFIER_SERIALIZERS.register(bus);
 		BFItems.ITEMS.register(bus);
 		BFEntities.ENTITIES.register(bus);
 		BFBlocks.BLOCKS.register(bus);
+		BFTabs.TABS.register(bus);
 	}
 
 	private void registerEntityAttributes(EntityAttributeCreationEvent event) {
@@ -58,10 +52,6 @@ public class BabyFat {
 		event.enqueueWork(() -> {
 			ComposterBlock.COMPOSTABLES.put(BFItems.WATER_LETTUCE.get(), 0.65F);
 		});
-	}
-
-	private void registerFeatures(FMLCommonSetupEvent event) {
-		event.enqueueWork(BFFeatures::registerFeatures);
 	}
 
 	private void onRanchuBreed(BabyEntitySpawnEvent event) {
@@ -103,13 +93,4 @@ public class BabyFat {
 	private void registerClient(FMLClientSetupEvent event) {
 		ClientEvents.init();
 	}
-
-	public static final CreativeModeTab BABY_FAT = new CreativeModeTab(MOD_ID) {
-		@Override
-		public ItemStack makeIcon() {
-			return BFItems.RANCHU.get().getDefaultInstance();
-		}
-	};
-
-
 }

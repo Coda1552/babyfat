@@ -1,6 +1,6 @@
-package coda.babyfat.client.model;
+package codyhuh.babyfat.client.model;
 
-import coda.babyfat.common.entities.Ranchu;
+import codyhuh.babyfat.common.entities.Ranchu;
 import com.google.common.collect.ImmutableList;
 import net.minecraft.client.model.AgeableListModel;
 import net.minecraft.client.model.geom.ModelPart;

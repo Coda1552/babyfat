@@ -1,6 +1,6 @@
-package coda.babyfat.client;
+package codyhuh.babyfat.client;
 
-import coda.babyfat.BabyFat;
+import codyhuh.babyfat.BabyFat;
 import net.minecraft.client.model.geom.ModelLayerLocation;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;

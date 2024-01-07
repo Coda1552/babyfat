@@ -1,11 +1,13 @@
-package coda.babyfat.common.blocks;
+package codyhuh.babyfat.common.blocks;
 
-import coda.babyfat.registry.BFBlocks;
+import codyhuh.babyfat.registry.BFBlocks;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.tags.BlockTags;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.BonemealableBlock;
 import net.minecraft.world.level.block.BushBlock;
@@ -13,7 +15,6 @@ import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.level.material.Fluids;
-import net.minecraft.world.level.material.Material;
 import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
@@ -34,7 +35,7 @@ public class WaterLettuceBlock extends BushBlock implements BonemealableBlock {
 	protected boolean mayPlaceOn(BlockState p_200014_1_, BlockGetter p_200014_2_, BlockPos p_200014_3_) {
 		FluidState fluidstate = p_200014_2_.getFluidState(p_200014_3_);
 		FluidState fluidstate1 = p_200014_2_.getFluidState(p_200014_3_.above());
-		return (fluidstate.getType() == Fluids.WATER || p_200014_1_.getMaterial() == Material.ICE) && fluidstate1.getType() == Fluids.EMPTY;
+		return (fluidstate.getType() == Fluids.WATER || p_200014_1_.is(BlockTags.ICE)) && fluidstate1.getType() == Fluids.EMPTY;
 	}
 
 	@Override
@@ -42,12 +43,8 @@ public class WaterLettuceBlock extends BushBlock implements BonemealableBlock {
 		return PlantType.WATER;
 	}
 
-	public BlockBehaviour.OffsetType getOffsetType() {
-		return BlockBehaviour.OffsetType.XZ;
-	}
-
 	@Override
-	public boolean isValidBonemealTarget(BlockGetter p_55002_, BlockPos p_55003_, BlockState p_55004_, boolean p_55005_) {
+	public boolean isValidBonemealTarget(LevelReader pLevel, BlockPos pPos, BlockState pState, boolean pIsClient) {
 		return true;
 	}
 

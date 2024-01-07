@@ -1,11 +1,11 @@
-package coda.babyfat.client.renderer;
+package codyhuh.babyfat.client.renderer;
 
-import coda.babyfat.BabyFat;
-import coda.babyfat.client.ModModelLayers;
-import coda.babyfat.client.model.RanchuModel;
-import coda.babyfat.common.entities.Ranchu;
+import codyhuh.babyfat.BabyFat;
+import codyhuh.babyfat.client.ModModelLayers;
+import codyhuh.babyfat.client.model.RanchuModel;
+import codyhuh.babyfat.common.entities.Ranchu;
 import com.mojang.blaze3d.vertex.PoseStack;
-import com.mojang.math.Vector3f;
+import com.mojang.math.Axis;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.MobRenderer;
@@ -44,10 +44,10 @@ public class RanchuRenderer<T extends Ranchu> extends MobRenderer<T, RanchuModel
 	protected void setupRotations(T entity, PoseStack posestack, float ageInTicks, float rotationYaw, float partialTicks) {
 		super.setupRotations(entity, posestack, ageInTicks, rotationYaw, partialTicks);
 		float f = 4.3F * Mth.sin(0.6F * ageInTicks);
-		posestack.mulPose(Vector3f.YP.rotationDegrees(f));
+		posestack.mulPose(Axis.YP.rotationDegrees(f));
 		if (!entity.isInWater()) {
 			posestack.translate(0.1F, 0.1F, -0.1F);
-			posestack.mulPose(Vector3f.ZP.rotationDegrees(90.0F));
+			posestack.mulPose(Axis.ZP.rotationDegrees(90.0F));
 		}
 	}
 

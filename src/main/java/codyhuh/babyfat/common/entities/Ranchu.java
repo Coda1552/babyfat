@@ -1,9 +1,9 @@
-package coda.babyfat.common.entities;
+package codyhuh.babyfat.common.entities;
 
-import coda.babyfat.common.entities.goal.RanchuBreedGoal;
-import coda.babyfat.registry.BFBlocks;
-import coda.babyfat.registry.BFEntities;
-import coda.babyfat.registry.BFItems;
+import codyhuh.babyfat.common.entities.goal.RanchuBreedGoal;
+import codyhuh.babyfat.registry.BFBlocks;
+import codyhuh.babyfat.registry.BFEntities;
+import codyhuh.babyfat.registry.BFItems;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.EntityDataAccessor;
@@ -192,7 +192,7 @@ public class Ranchu extends Animal implements Bucketable {
 			this.setAirSupply(p_209207_1_ - 1);
 			if (this.getAirSupply() == -20) {
 				this.setAirSupply(0);
-				this.hurt(DamageSource.DROWN, 2.0F);
+				this.hurt(damageSources().drown(), 2.0F);
 			}
 		} else {
 			this.setAirSupply(300);
@@ -235,14 +235,14 @@ public class Ranchu extends Animal implements Bucketable {
 
 	@Override
 	public void aiStep() {
-		if (!this.isInWater() && this.onGround && this.verticalCollision) {
+		if (!this.isInWater() && this.onGround() && this.verticalCollision) {
 			this.setDeltaMovement(this.getDeltaMovement().add((this.random.nextFloat() * 2.0F - 1.0F) * 0.05F, 0.4F, (this.random.nextFloat() * 2.0F - 1.0F) * 0.05F));
-			this.onGround = false;
+			this.setOnGround(false);
 			this.hasImpulse = true;
 			this.playSound(this.getFlopSound(), this.getSoundVolume(), this.getVoicePitch());
 		}
 
-		long time = level.getLevelData().getDayTime();
+		long time = level().getLevelData().getDayTime();
 
 		if (canFindLettuce() && time % 24000 > 23000 && !this.isBaby()) {
 			setInLoveTime(40);
@@ -262,7 +262,7 @@ public class Ranchu extends Animal implements Bucketable {
 				for(int k = 0; k <= j; k = k > 0 ? -k : 1 - k) {
 					for(int l = k < j && k > -j ? j : 0; l <= j; l = l > 0 ? -l : 1 - l) {
 						blockpos$mutable.setWithOffset(blockpos, k, i, l);
-						if (level.getBlockState(blockpos$mutable).is(BFBlocks.WATER_LETTUCE.get())) {
+						if (level().getBlockState(blockpos$mutable).is(BFBlocks.WATER_LETTUCE.get())) {
 							return true;
 						}
 					}
@@ -359,7 +359,7 @@ public class Ranchu extends Animal implements Bucketable {
 			ItemStack itemstack = p_27477_.getItemInHand(p_27478_);
 			if (this.isFood(itemstack)) {
 				int i = this.getAge();
-				if (!this.level.isClientSide && i == 0 && this.canFallInLove()) {
+				if (!this.level().isClientSide && i == 0 && this.canFallInLove()) {
 					this.usePlayerItem(p_27477_, p_27478_, itemstack);
 					this.setInLove(p_27477_);
 					this.setInLoveTime(24000);
@@ -369,10 +369,10 @@ public class Ranchu extends Animal implements Bucketable {
 				if (this.isBaby()) {
 					this.usePlayerItem(p_27477_, p_27478_, itemstack);
 					this.ageUp(getSpeedUpSecondsWhenFeeding(-i), true);
-					return InteractionResult.sidedSuccess(this.level.isClientSide);
+					return InteractionResult.sidedSuccess(this.level().isClientSide);
 				}
 
-				if (this.level.isClientSide) {
+				if (this.level().isClientSide) {
 					return InteractionResult.CONSUME;
 				}
 			}

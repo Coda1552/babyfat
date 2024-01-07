@@ -1,10 +1,10 @@
-package coda.babyfat.client;
+package codyhuh.babyfat.client;
 
-import coda.babyfat.BabyFat;
-import coda.babyfat.client.model.RanchuModel;
-import coda.babyfat.client.renderer.RanchuRenderer;
-import coda.babyfat.registry.BFBlocks;
-import coda.babyfat.registry.BFEntities;
+import codyhuh.babyfat.BabyFat;
+import codyhuh.babyfat.client.model.RanchuModel;
+import codyhuh.babyfat.client.renderer.RanchuRenderer;
+import codyhuh.babyfat.registry.BFBlocks;
+import codyhuh.babyfat.registry.BFEntities;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.BiomeColors;
 import net.minecraft.world.level.GrassColor;
