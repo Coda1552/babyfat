@@ -13,7 +13,7 @@ public class BFTabs {
     public static final RegistryObject<CreativeModeTab> BF_TAB = TABS.register("babyfat_tab",
             () -> CreativeModeTab.builder()
                     .title(Component.translatable("itemGroup." + BabyFat.MOD_ID))
-                    .icon(BFItems.RANCHU.get()::getDefaultInstance)
+                    .icon(BFItems.RANCHU_BUCKET.get()::getDefaultInstance)
                     .displayItems((displayParams, output) -> {
                         for (var item : BFItems.ITEMS.getEntries()) {
                             output.accept(item.get());

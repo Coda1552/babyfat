@@ -1,7 +1,21 @@
 {
   "variants": {
-    "": {
-      "model": "babyfat:block/water_lettuce"
-    }
+    "": [
+      {
+        "model": "babyfat:block/water_lettuce"
+      },
+      {
+        "model": "babyfat:block/water_lettuce",
+        "y": 90
+      },
+      {
+        "model": "babyfat:block/water_lettuce",
+        "y": 180
+      },
+      {
+        "model": "babyfat:block/water_lettuce",
+        "y": 270
+      }
+    ]
   }
 }

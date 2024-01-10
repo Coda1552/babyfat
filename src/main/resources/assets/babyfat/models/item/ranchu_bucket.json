@@ -1,7 +1,6 @@
 {
-  "parent" : "item/generated",
-  "textures" : {
-    "layer0" : "babyfat:item/lower_bucket",
-    "layer1" : "babyfat:item/bucket_content/ranchu"
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "babyfat:item/ranchu_bucket"
   }
 }
