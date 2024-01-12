@@ -30,7 +30,6 @@ public class BabyFat {
 		IEventBus bus = FMLJavaModLoadingContext.get().getModEventBus();
 		IEventBus forgeBus = MinecraftForge.EVENT_BUS;
 
-		bus.addListener(this::registerClient);
 		bus.addListener(this::registerEntityAttributes);
 		bus.addListener(this::registerCommon);
 		forgeBus.addListener(this::onRanchuBreed);
@@ -88,9 +87,5 @@ public class BabyFat {
 			child.setBaby(true);
 			ranchuA.getCommandSenderWorld().addFreshEntity(child);
 		}
-	}
-
-	private void registerClient(FMLClientSetupEvent event) {
-		ClientEvents.init();
 	}
 }
