@@ -6,6 +6,9 @@
     },
     {
       "item": "minecraft:book"
+    },
+    {
+      "item": "minecraft:blue_dye"
     }
   ],
   "book": "babyfat:the_book_of_baby_fat"
