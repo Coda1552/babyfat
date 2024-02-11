@@ -5,7 +5,7 @@
   "pages": [
     {
       "type": "patchouli:entity",
-      "entity": "babyfat:ranchu",
+      "entity": "babyfat:ranchu{Variant:270}",
       "text": "Meet the Ranchu! These fish are great for any aquarium.",
       "offset": -0.3
     },

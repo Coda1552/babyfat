@@ -2,5 +2,9 @@
   "name": "The Book of Baby Fat",
   "landing_text": "Ranchu goldfish, plants, and everything else in the mod!",
   "version": 1,
-  "show_progress": false
+  "creative_tab": "babyfat:babyfat_tab",
+  "use_resource_pack": true,
+  "model": "babyfat:book_of_baby_fat",
+  "book_texture": "babyfat:textures/gui/bobf.png",
+  "use_blocky_font": true
 }

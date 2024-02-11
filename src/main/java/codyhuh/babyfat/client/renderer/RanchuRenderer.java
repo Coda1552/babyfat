@@ -29,7 +29,7 @@ public class RanchuRenderer<T extends Ranchu> extends MobRenderer<T, RanchuModel
 		if (TEXTURES[variant - 1] == null) {
 			ResourceLocation loc = new ResourceLocation(BabyFat.MOD_ID, "textures/entity/ranchu/ranchu_" + variant + ".png");
 			if (!Minecraft.getInstance().getResourceManager().getResource(loc).isPresent()) {
-				System.out.println("Found Unknown variant " + variant + ", using default");
+				System.out.println("Found unknown variant " + variant + ", using default");
 				loc = DEFAULT_TEXTURES;
 				return loc;
 			}
@@ -45,7 +45,7 @@ public class RanchuRenderer<T extends Ranchu> extends MobRenderer<T, RanchuModel
 		super.setupRotations(entity, posestack, ageInTicks, rotationYaw, partialTicks);
 		float f = 4.3F * Mth.sin(0.6F * ageInTicks);
 		posestack.mulPose(Axis.YP.rotationDegrees(f));
-		if (!entity.isInWater()) {
+		if (entity.isAddedToWorld() && !entity.isInWater()) {
 			posestack.translate(0.1F, 0.1F, -0.1F);
 			posestack.mulPose(Axis.ZP.rotationDegrees(90.0F));
 		}

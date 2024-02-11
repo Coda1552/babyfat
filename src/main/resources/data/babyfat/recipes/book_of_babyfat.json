@@ -1,0 +1,12 @@
+{
+  "type": "patchouli:shapeless_book_recipe",
+  "ingredients": [
+    {
+      "item": "babyfat:water_lettuce"
+    },
+    {
+      "item": "minecraft:book"
+    }
+  ],
+  "book": "babyfat:the_book_of_baby_fat"
+}
