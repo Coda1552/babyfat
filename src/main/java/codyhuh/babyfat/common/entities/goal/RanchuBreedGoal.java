@@ -38,7 +38,7 @@ public class RanchuBreedGoal extends Goal {
 
 		long time = this.animal.level().getLevelData().getDayTime();
 
-		if (!this.animal.isInLove() || this.animal.isBaby() || time % 24000 <= 23000) {
+		if (!this.animal.isInLove() || this.animal.isBaby() || time % 24000 <= 23000 || !this.animal.fromBucket()) {
 			return false;
 		} else if (list.size() < 6) {
 			this.targetMate = this.getNearbyMate();
