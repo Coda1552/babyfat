@@ -10,19 +10,19 @@
     {
       "type": "patchouli:entity",
       "entity": "babyfat:ranchu{Variant:270}",
-      "text": "An orange and white ranchu, with black stripes and a short tail.",
+      "text": "An red and white ranchu, with black stripes and a long tail.",
       "offset": -0.3
     },
     {
       "type": "patchouli:entity",
       "entity": "babyfat:ranchu{Variant:296}",
-      "text": "A black ranchu, with white accents and a medium tail.",
+      "text": "A black ranchu, with white accents and a short tail.",
       "offset": -0.3
     },
     {
       "type": "patchouli:entity",
-      "entity": "babyfat:ranchu{Variant:256}",
-      "text": "A red and white ranchu, with black stripes and a long tail.",
+      "entity": "babyfat:ranchu{Variant:277}",
+      "text": "An orange and white ranchu, with a medium tail.",
       "offset": -0.3
     }
   ]

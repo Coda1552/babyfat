@@ -79,7 +79,7 @@ public class RanchuModel<T extends Entity> extends AgeableListModel<T> {
 	public void setupAnim(T entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
 		float speed = 1.5f;
 		float degree = 0.8f;
-		if (entity.isInWater()) {
+		if (entity.isInWater() && entity.isAddedToWorld()) {
 			this.root.xRot = headPitch * ((float) Math.PI / 180F);
 			this.root.yRot = netHeadYaw * ((float) Math.PI / 180F);
 			this.root.yRot += Mth.cos(limbSwing * speed * 0.5F) * degree * 0.5F * limbSwingAmount;

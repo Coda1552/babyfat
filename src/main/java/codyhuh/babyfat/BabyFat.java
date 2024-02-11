@@ -1,12 +1,12 @@
 package codyhuh.babyfat;
 
-import codyhuh.babyfat.client.ClientEvents;
 import codyhuh.babyfat.common.entities.Ranchu;
-import codyhuh.babyfat.registry.*;
+import codyhuh.babyfat.registry.BFBlocks;
+import codyhuh.babyfat.registry.BFEntities;
+import codyhuh.babyfat.registry.BFItems;
+import codyhuh.babyfat.registry.BFTabs;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.SpawnPlacements;
-import net.minecraft.world.item.CreativeModeTab;
-import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.ComposterBlock;
 import net.minecraft.world.level.levelgen.Heightmap;
 import net.minecraftforge.common.MinecraftForge;
@@ -14,7 +14,6 @@ import net.minecraftforge.event.entity.EntityAttributeCreationEvent;
 import net.minecraftforge.event.entity.living.BabyEntitySpawnEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 

@@ -1,11 +1,11 @@
 {
   "name": "The Basics",
-  "icon": "babyfat:ranchu",
+  "icon": "patchouli:guide_book{\"patchouli:book\": \"babyfat:the_book_of_baby_fat\"}",
   "category": "babyfat:baby_fat_101",
   "pages": [
     {
       "type": "patchouli:entity",
-      "entity": "babyfat:ranchu{Variant:270}",
+      "entity": "babyfat:ranchu{Variant:221}",
       "text": "Meet the Ranchu! These fish are great for any aquarium.",
       "offset": -0.3
     },

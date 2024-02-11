@@ -5,5 +5,7 @@
   "entity.babyfat.ranchu": "Ranchu",
   "block.babyfat.water_lettuce": "Water Lettuce",
 
+  "tooltip.babyfat.domesticated": "Domesticated",
+
   "itemGroup.babyfat": "Baby Fat"
 }
