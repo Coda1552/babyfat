@@ -1,5 +1,6 @@
 package codyhuh.babyfat.common.entities;
 
+import codyhuh.babyfat.BFConfig;
 import codyhuh.babyfat.common.entities.goal.RanchuBreedGoal;
 import codyhuh.babyfat.registry.BFBlocks;
 import codyhuh.babyfat.registry.BFEntities;
@@ -244,11 +245,13 @@ public class Ranchu extends Animal implements Bucketable {
 
 		long time = level().getLevelData().getDayTime();
 
-		if (canFindLettuce() && time % 24000 > 23000 && !this.isBaby()) {
-			setInLoveTime(40);
-		}
-		if (canFindLettuce() && time % 13000 > 12500) {
-			setInLoveTime(40);
+		if (BFConfig.naturalBreeding) {
+			if (canFindLettuce() && time % 24000 > 23000 && !this.isBaby()) {
+				setInLoveTime(40);
+			}
+			if (canFindLettuce() && time % 13000 > 12500) {
+				setInLoveTime(40);
+			}
 		}
 		super.aiStep();
 	}
@@ -353,9 +356,9 @@ public class Ranchu extends Animal implements Bucketable {
 	public InteractionResult mobInteract(Player p_27477_, InteractionHand p_27478_) {
 		Optional<InteractionResult> result = Bucketable.bucketMobPickup(p_27477_, p_27478_, this);
 
-		if(result.isPresent() && result.get().consumesAction()){
+		if (result.isPresent() && result.get().consumesAction()) {
 			return result.get();
-		}else {
+		} else {
 			ItemStack itemstack = p_27477_.getItemInHand(p_27478_);
 			if (this.isFood(itemstack)) {
 				int i = this.getAge();

@@ -13,9 +13,13 @@ import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.EntityAttributeCreationEvent;
 import net.minecraftforge.event.entity.living.BabyEntitySpawnEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
+import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.config.ModConfig;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,6 +27,7 @@ import java.util.List;
 @Mod(BabyFat.MOD_ID)
 public class BabyFat {
 	public static final String MOD_ID = "babyfat";
+	public static final Logger LOGGER = LoggerFactory.getLogger(MOD_ID);
 	public static final List<Runnable> CALLBACKS = new ArrayList<>();
 
 	public BabyFat() {
@@ -37,6 +42,8 @@ public class BabyFat {
 		BFEntities.ENTITIES.register(bus);
 		BFBlocks.BLOCKS.register(bus);
 		BFTabs.TABS.register(bus);
+
+		ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, BFConfig.Common.SPEC);
 	}
 
 	private void registerEntityAttributes(EntityAttributeCreationEvent event) {

@@ -38,18 +38,17 @@ public class RanchuBreedGoal extends Goal {
 
 		long time = this.animal.level().getLevelData().getDayTime();
 
-		if (!this.animal.isInLove() || this.animal.isBaby() || time % 24000 <= 23000 || !this.animal.fromBucket()) {
+
+		if (!this.animal.isInLove() || this.animal.isBaby()/* || time % 24000 <= 23000 || !this.animal.fromBucket()*/) {
 			return false;
-		} else if (list.size() < 6) {
+		} else {
 			this.targetMate = this.getNearbyMate();
 			return this.targetMate != null;
-		} else {
-			return false;
 		}
 	}
 
 	public boolean canContinueToUse() {
-		return this.targetMate.isAlive() && this.targetMate.isInLove() && this.spawnBabyDelay < 60;
+		return this.targetMate.isAlive() && this.targetMate.isInLove() && this.spawnBabyDelay < 40;
 	}
 
 	public void stop() {
@@ -58,13 +57,14 @@ public class RanchuBreedGoal extends Goal {
 	}
 
 	public void tick() {
+		System.out.println(spawnBabyDelay);
 		this.animal.getLookControl().setLookAt(this.targetMate, 10.0F, (float) this.animal.getMaxHeadXRot());
 		this.animal.getNavigation().moveTo(this.targetMate, this.moveSpeed);
 		++this.spawnBabyDelay;
-		if (this.spawnBabyDelay >= 60 && this.animal.distanceToSqr(this.targetMate) < 9.0D) {
+		if (this.spawnBabyDelay >= 40 && this.animal.distanceToSqr(this.targetMate) < 9.0D) {
 			this.spawnBaby();
 		}
-		if (this.animal.tickCount % 20 == 0) {
+		if (this.spawnBabyDelay == 20) {
 			this.animal.level().broadcastEntityEvent(this.animal, (byte) 18);
 		}
 	}
